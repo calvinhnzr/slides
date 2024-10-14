@@ -13,10 +13,16 @@ export const slidesAtom = atom(async (get) => {
 })
 
 export const MIN_VALUE = 0
-export const MAX_VALUE = slidesModule.length - 1
+export const MAX_VALUE = slidesModule.length //- 1
 
-export const countAtom = atom(0, (get, set, update) => {
+export const currentHorizontalAtom = atom(0, (get, set, update) => {
   const newValue =
-    typeof update === "function" ? update(get(countAtom)) : update
-  set(countAtom, Math.min(Math.max(newValue, MIN_VALUE), MAX_VALUE))
+    typeof update === "function" ? update(get(currentHorizontalAtom)) : update
+  set(currentHorizontalAtom, Math.min(Math.max(newValue, MIN_VALUE), MAX_VALUE))
+})
+
+export const currentVerticalAtom = atom(0, (get, set, update) => {
+  const newValue1 =
+    typeof update === "function" ? update(get(currentVerticalAtom)) : update
+  set(currentVerticalAtom, Math.min(Math.max(newValue1, 0), 10 - 1))
 })

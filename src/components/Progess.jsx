@@ -1,12 +1,13 @@
 import styled from "styled-components"
 import { useAtom } from "jotai"
 import { COLOR_ACCENT, COLOR_BACKGROUND } from "@/store/base"
-import { MIN_VALUE, MAX_VALUE, countAtom } from "@/store/atoms"
+import { MIN_VALUE, MAX_VALUE, currentHorizontalAtom } from "@/store/atoms"
 
 const myDarkGrey = COLOR_BACKGROUND
 const myBlue = COLOR_ACCENT
 
 const StyledProgress = styled.progress`
+  z-index: 100;
   display: inherit;
   -webkit-appearance: none;
   appearance: none;
@@ -34,9 +35,9 @@ const StyledProgress = styled.progress`
 `
 
 const Progress = () => {
-  const [count] = useAtom(countAtom)
+  const [currentHorizont] = useAtom(currentHorizontalAtom)
 
-  return <StyledProgress value={count} max={MAX_VALUE} />
+  return <StyledProgress value={currentHorizont} max={MAX_VALUE} />
 }
 
 export default Progress

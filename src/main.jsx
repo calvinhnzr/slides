@@ -9,26 +9,14 @@ import "@/global/reset.css"
 import "@/global/index.css"
 import "@/global/App.css"
 
+import { Card, Container } from "@/components/Card"
+import { Headline, SubHeadline, Title } from "@/components/Title"
+
 const GlobalStyle = createGlobalStyle`
   h1, h2, h3, h4, h5, h6, p, li, label, th, td {
 		color: white;
 		font-family: "Roboto", sans-serif ;
 	}
-  h1 {
-    font-size: 4.5rem;
-    font-weight: bold;
-  }
-  h2 {
-    font-size: 2.25rem;
-    font-weight:  100;
-    font-style: italic;
-    line-height: 1.1;
-  }
-  h3 {
-    font-size: 3rem;
-    font-weight: bold;
-    line-height: 1.2;
-  }
 `
 
 function shouldForwardProp(propName, target) {
@@ -40,13 +28,17 @@ function shouldForwardProp(propName, target) {
   return true
 }
 
-const components = {
-  // em: (props) => <i {...props} />,
-}
-
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <MDXProvider components={components}>
+    <MDXProvider
+      components={{
+        h1: Headline,
+        h2: SubHeadline,
+        h3: Title,
+        Card,
+        Container,
+      }}
+    >
       <StyleSheetManager shouldForwardProp={shouldForwardProp}>
         <GlobalStyle />
         <App />
