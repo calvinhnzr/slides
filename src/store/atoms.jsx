@@ -5,6 +5,11 @@ const slidesModule = [
   (p) => import("@/slides/slide-010.mdx"),
   (p) => import("@/slides/slide-020.mdx"),
   (p) => import("@/slides/slide-030.mdx"),
+  (p) => import("@/slides/slide-040.mdx"),
+  (p) => import("@/slides/slide-050.mdx"),
+  (p) => import("@/slides/slide-060.mdx"),
+  (p) => import("@/slides/slide-070.mdx"),
+  (p) => import("@/slides/slide-080.mdx"),
 ]
 
 export const slidesAtom = atom(async (get) => {
@@ -15,6 +20,7 @@ export const slidesAtom = atom(async (get) => {
 export const MIN_VALUE = 0
 export const MAX_VALUE = slidesModule.length //- 1
 
+// currentXCountAtom
 export const currentHorizontalAtom = atom(0, (get, set, update) => {
   const newValue =
     typeof update === "function" ? update(get(currentHorizontalAtom)) : update
