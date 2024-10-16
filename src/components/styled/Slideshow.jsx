@@ -70,7 +70,6 @@ const Article = styled.article`
   height: 100%;
   flex: 0 0 auto;
 
-  display: flex;
   flex-direction: column;
   transition: 0.5s transform linear;
   will-change: transform;
