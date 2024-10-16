@@ -12,10 +12,24 @@ const slidesModule = [
   (p) => import("@/slides/slide-080.mdx"),
 ]
 
+const initialY = new Array(slidesModule.length).fill(0)
+
+export const currentSlideAtom = atom({
+  x: 0, // start at zero
+  y: initialY, // fill with an array of 0s based on the number of slideModules
+})
+
 export const slidesAtom = atom(async (get) => {
   const loadedSlides = await Promise.all(slidesModule.map((load) => load()))
+
   return loadedSlides
 })
+
+// example
+// const currentSlideAtom = {
+//   x: 1, // value = current position of horizontal slide
+//   y: [0, 0, 1, 2, 0, 1, 0, 0], // length = num of Slides; value = current position of vertical slide
+// }
 
 export const MIN_VALUE = 0
 export const MAX_VALUE = slidesModule.length //- 1

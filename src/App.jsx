@@ -1,18 +1,13 @@
 import { useRef, useEffect } from "react"
 import { useAtom } from "jotai"
 
-import {
-  currentHorizontalAtom,
-  currentVerticalAtom,
-  MAX_VALUE,
-  slidesAtom,
-} from "@/store/atoms"
+import { currentSlideAtom, MAX_VALUE, slidesAtom } from "@/store/atoms"
 
 import useGamepad from "@/hooks/useGamepad"
 import useKeyDown from "@/hooks/useKeydown"
 import useFullscreen from "@/hooks/useFullScreen"
 
-import { Slideshow, Article, Grid } from "@/components/Slideshow"
+import { Main, Article, Grid } from "@/components/Slideshow"
 
 import Progress from "@/components/Progess"
 import { Title } from "./components/Title"
@@ -21,25 +16,50 @@ export function App() {
   const { buttons, axes } = useGamepad(true)
   const [isFullscreen, toggleFullscreen] = useFullscreen()
 
-  const [currentHorizont, setCurrentHorizont] = useAtom(currentHorizontalAtom)
-  const [currentVertical, setCurrentVertical] = useAtom(currentVerticalAtom)
+  const [currentSlide, setCurrentSlide] = useAtom(currentSlideAtom)
+
   const [slidesData] = useAtom(slidesAtom)
 
+  const updateXValue = (newX) => {
+    setCurrentSlide((prev) => ({
+      ...prev,
+      x: newX,
+    }))
+  }
+
+  const updateYValue = (newY) => {
+    setCurrentSlide((prev) => {
+      const newYArray = [...prev.y]
+      if (prev.x >= 0 && prev.x < newYArray.length) {
+        newYArray[prev.x] = newY
+      }
+      return {
+        ...prev,
+        y: newYArray,
+      }
+    })
+  }
+
   useKeyDown((event) => {
-    console.log(event.key)
+    console.log(currentSlide.y)
     switch (event.key) {
       case "ArrowRight":
-        setCurrentHorizont(currentHorizont + 1)
+        // setCurrentHorizont(currentHorizont + 1)
+        updateXValue(currentSlide.x + 1)
         break
       case "ArrowLeft":
-        setCurrentHorizont(currentHorizont - 1)
+        // setCurrentHorizont(currentHorizont - 1)
+        updateXValue(currentSlide.x - 1)
         break
 
       case "ArrowDown":
-        setCurrentVertical(currentVertical + 1)
+        // setCurrentVertical(currentVertical + 1)
+        updateYValue(currentSlide.y[currentSlide.x] + 1)
+
         break
       case "ArrowUp":
-        setCurrentVertical(currentVertical - 1)
+        // setCurrentVertical(currentVertical - 1)
+        updateYValue(currentSlide.y[currentSlide.x] - 1)
         break
       case "f":
         toggleFullscreen()
@@ -63,7 +83,16 @@ export function App() {
 
   return (
     <>
-      <Slideshow $currentHorizont={currentHorizont}>
+      <Main $currentSlideX={currentSlide.x}>
+        {/* Sliding Down Testing */}
+        <Article className="subslide" $currentSlideY={currentSlide.y[0]}>
+          {[...Array(10)].map((el, index) => (
+            <Grid key={index} className="simple">
+              <Title>{index}</Title>
+            </Grid>
+          ))}
+        </Article>
+        {/*  */}
         {slidesData.map((el, index) => (
           <Article key={index} className={el.layout || "normal"}>
             <Grid layout={el.layout} className={el.slideClasses || "simple"}>
@@ -71,16 +100,9 @@ export function App() {
             </Grid>
           </Article>
         ))}
-        <Article className="subslide" $currentVertical={currentVertical}>
-          {[...Array(10)].map((el, index) => (
-            <Grid key={index} className="simple">
-              <Title>{index}</Title>
-            </Grid>
-          ))}
-        </Article>
-      </Slideshow>
+      </Main>
 
-      <Progress max={MAX_VALUE} value={currentHorizont} />
+      <Progress max={MAX_VALUE} value={currentSlide.x} />
     </>
   )
 }
