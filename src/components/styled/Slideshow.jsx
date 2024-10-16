@@ -3,12 +3,11 @@ import { atom, useAtom } from "jotai"
 import styled from "@emotion/styled"
 import { COLOR_BACKGROUND, COLOR_BACKGROUND_DARK } from "@/store/base"
 import useGamepad from "@/hooks/useGamepad"
-import useKeyDown from "@/hooks/useKeydown"
+
 import "@/styles/Slide.css"
 
 // Vertical Srcoll
 const Main = styled.main`
-  outline: 1px solid blue;
   height: 100%;
   width: 100%;
   display: flex;
@@ -20,6 +19,7 @@ const Main = styled.main`
 
 export const Slideshow = ({ data, max }) => {
   const [currentArticle, setCurrentArticle] = useState(0)
+  const { buttons, axes } = useGamepad(true)
 
   const handleKeyDown = (event) => {
     switch (event.key) {
@@ -65,7 +65,6 @@ export const Slideshow = ({ data, max }) => {
 
 // Horizontal Srcoll
 const Article = styled.article`
-  outline: 1px solid green;
   width: 100%;
   height: 100%;
   flex: 0 0 auto;
@@ -112,7 +111,6 @@ const ArticleWrapper = (props) => {
 }
 
 export const Section = styled.section`
-  outline: 1px solid red;
   width: 100%;
   height: 100%;
   display: grid;

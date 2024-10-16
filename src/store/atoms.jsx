@@ -2,11 +2,6 @@ import { atom } from "jotai"
 
 const modules = import.meta.glob("@/pages/*/*.mdx")
 
-export const currentSlideAtom = atom({
-  x: 0,
-  y: [],
-})
-
 export const slidesAtom = atom(async (get) => {
   const nestedSlides = {}
 
