@@ -31,7 +31,10 @@ export function App() {
     setCurrentSlide((prev) => {
       const newYArray = [...prev.y]
       if (prev.x >= 0 && prev.x < newYArray.length) {
-        newYArray[prev.x] = newY
+        // Check if the current slide has a state of 'subslide'
+        if (slidesData[prev.x].layout === "subslide") {
+          newYArray[prev.x] = newY < 0 ? 0 : newY // Ensure y value is never negative
+        }
       }
       return {
         ...prev,
@@ -39,9 +42,9 @@ export function App() {
       }
     })
   }
-
   useKeyDown((event) => {
-    console.log(currentSlide.y)
+    console.log("X: " + currentSlide.x)
+    console.log("Y: " + currentSlide.y)
     switch (event.key) {
       case "ArrowRight":
         // setCurrentHorizont(currentHorizont + 1)
@@ -85,13 +88,13 @@ export function App() {
     <>
       <Main $currentSlideX={currentSlide.x}>
         {/* Sliding Down Testing */}
-        <Article className="subslide" $currentSlideY={currentSlide.y[0]}>
+        {/* <Article className="subslide" $currentSlideY={currentSlide.y[0]}>
           {[...Array(10)].map((el, index) => (
             <Grid key={index} className="simple">
               <Title>{index}</Title>
             </Grid>
           ))}
-        </Article>
+        </Article> */}
         {/*  */}
         {slidesData.map((el, index) => (
           <Article key={index} className={el.layout || "normal"}>
