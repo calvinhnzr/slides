@@ -40,3 +40,5 @@ export const slidesAtom = atom(async (get) => {
   const nestedArray = convertToArray(nestedSlides)
   return nestedArray
 })
+
+export const currentArticleAtom = atom(0)

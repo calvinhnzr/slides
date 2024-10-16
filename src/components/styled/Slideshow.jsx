@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react"
-import { atom, useAtom } from "jotai"
+import { useAtom } from "jotai"
 import styled from "@emotion/styled"
 import { COLOR_BACKGROUND, COLOR_BACKGROUND_DARK } from "@/store/base"
-import useGamepad from "@/hooks/useGamepad"
-
+import { currentArticleAtom } from "@/store/atoms"
 import "@/styles/Slide.css"
 
 // Vertical Srcoll
@@ -18,8 +17,7 @@ const Main = styled.main`
 `
 
 export const Slideshow = ({ data, max }) => {
-  const [currentArticle, setCurrentArticle] = useState(0)
-  const { buttons, axes } = useGamepad(true)
+  const [currentArticle, setCurrentArticle] = useAtom(currentArticleAtom)
 
   const handleKeyDown = (event) => {
     switch (event.key) {
