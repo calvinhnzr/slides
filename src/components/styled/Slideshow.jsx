@@ -1,6 +1,7 @@
 import { styled } from "styled-components"
 import { COLOR_BACKGROUND, COLOR_BACKGROUND_DARK } from "@/store/base"
-import "@/global/Slide.css"
+import "@/styles/Slide.css"
+import { useState } from "react"
 
 // Vertical Srcoll
 export const Main = styled.main`
@@ -32,7 +33,7 @@ export const Article = styled.article`
   }
 `
 
-export const Grid = styled.section`
+export const Section = styled.section`
   width: 100%;
   height: 100%;
   display: grid;
@@ -40,3 +41,10 @@ export const Grid = styled.section`
   grid-template-rows: repeat(12, 1fr);
   gap: 1rem;
 `
+
+// Article
+const Slideshow = (props) => {
+  const [currentPosition, setCurrentPosition] = useState(0)
+
+  return <Article>{props.children}</Article>
+}

@@ -1,13 +1,13 @@
 import { useRef, useEffect } from "react"
 import { useAtom } from "jotai"
 
-import { currentSlideAtom, MAX_VALUE, slidesAtom } from "@/store/atoms"
+import { currentSlideAtom, slidesAtom } from "@/store/atoms"
 
 import useGamepad from "@/hooks/useGamepad"
 import useKeyDown from "@/hooks/useKeydown"
 import useFullscreen from "@/hooks/useFullScreen"
 
-import { Main, Article, Grid } from "@/components/styled/Slideshow"
+import { Main, Article, Section } from "@/components/styled/Slideshow"
 import { Progress } from "@/components/styled/Progess"
 
 export function App() {
@@ -17,6 +17,15 @@ export function App() {
   const [currentSlide, setCurrentSlide] = useAtom(currentSlideAtom)
 
   const [slidesData] = useAtom(slidesAtom)
+
+  const MAX_VALUE = slidesData.length
+
+  useEffect(() => {
+    setCurrentSlide((prev) => ({
+      ...prev,
+      y: new Array(slidesData[0].length).fill(0),
+    }))
+  }, [])
 
   const updateXValue = (newX) => {
     if (newX >= 0 && newX <= MAX_VALUE) {
@@ -30,11 +39,9 @@ export function App() {
   const updateYValue = (newY) => {
     setCurrentSlide((prev) => {
       const newYArray = [...prev.y]
+
       if (prev.x >= 0 && prev.x < newYArray.length) {
-        // Check if the current slide has a state of 'subslide'
-        if (slidesData[prev.x].layout === "subslide") {
-          newYArray[prev.x] = newY < 0 ? 0 : newY // Ensure y value is never negative
-        }
+        newYArray[prev.x] = newY < 0 ? 0 : newY // Ensure y value is never negative
       }
       return {
         ...prev,
@@ -43,8 +50,10 @@ export function App() {
     })
   }
   useKeyDown((event) => {
+    console.log(currentSlide)
     console.log("X: " + currentSlide.x)
     console.log("Y: " + currentSlide.y)
+
     switch (event.key) {
       case "ArrowRight":
         updateXValue(currentSlide.x + 1)
@@ -85,19 +94,28 @@ export function App() {
   return (
     <>
       <Main $currentSlideX={currentSlide.x}>
-        {slidesData.map((el, index) => (
-          <Article
-            key={index}
-            className={el.layout || "normal"}
-            // saves index of x not from current slide, rather in mapping from mdx files
-            $currentSlideY={currentSlide.y[currentSlide.x]}
-          >
-            {/* render grid based on num of subfolders */}
-            <Grid layout={el.layout} className={el.slideClasses || "simple"}>
-              <el.default />
-            </Grid>
-          </Article>
-        ))}
+        {slidesData &&
+          slidesData[0].map((article, index) => {
+            return (
+              <Article
+                key={index}
+                className={"normal"}
+                $currentSlideY={currentSlide.y[currentSlide.x]}
+              >
+                {article.map((section, index) => {
+                  const el = section[0]
+                  return (
+                    <Section
+                      key={index}
+                      className={section[0].slideClasses || "simple"}
+                    >
+                      {<el.default />}
+                    </Section>
+                  )
+                })}
+              </Article>
+            )
+          })}
       </Main>
       <Progress max={MAX_VALUE} value={currentSlide.x} />
     </>

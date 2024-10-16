@@ -5,9 +5,9 @@ import isPropValid from "@emotion/is-prop-valid"
 import { StyleSheetManager, createGlobalStyle } from "styled-components"
 
 import { App } from "./App.jsx"
-import "@/global/reset.css"
-import "@/global/index.css"
-import "@/global/App.css"
+import "@/styles/reset.css"
+import "@/styles/index.css"
+import "@/styles/App.css"
 
 import { Card, Container } from "@/components/styled/Card"
 import { Headline, SubHeadline, Title } from "@/components/styled/Title"
@@ -29,20 +29,20 @@ function shouldForwardProp(propName, target) {
 }
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <MDXProvider
-      components={{
-        h1: Headline,
-        h2: SubHeadline,
-        h3: Title,
-        Card,
-        Container,
-      }}
-    >
-      <StyleSheetManager shouldForwardProp={shouldForwardProp}>
-        <GlobalStyle />
-        <App />
-      </StyleSheetManager>
-    </MDXProvider>
-  </StrictMode>
+  // <StrictMode>
+  <MDXProvider
+    components={{
+      h1: Headline,
+      h2: SubHeadline,
+      h3: Title,
+      Card,
+      Container,
+    }}
+  >
+    <StyleSheetManager shouldForwardProp={shouldForwardProp}>
+      <GlobalStyle />
+      <App />
+    </StyleSheetManager>
+  </MDXProvider>
+  // </StrictMode>
 )
