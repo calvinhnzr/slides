@@ -18,7 +18,7 @@ export function App() {
 
   const [slidesData] = useAtom(slidesAtom)
 
-  const MAX_VALUE = slidesData.length
+  const MAX_VALUE = slidesData[0].length - 1
 
   useEffect(() => {
     setCurrentSlide((prev) => ({
