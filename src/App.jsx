@@ -17,7 +17,6 @@ export function App() {
   const [isFullscreen, toggleFullscreen] = useFullscreen()
   const { buttons, axes } = useGamepad(true)
   useKeyDown((event) => {
-    console.log(event)
     switch (event.key) {
       case "f":
         toggleFullscreen()

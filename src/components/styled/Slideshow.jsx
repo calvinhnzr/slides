@@ -49,13 +49,17 @@ export const Slideshow = ({ data, max }) => {
       {data.map((article, index) => (
         <ArticleWrapper
           key={index}
-          max={article.length - 1}
           index={index}
+          max={article.length - 1}
           currentArticle={currentArticle}
         >
           {article.map((section, index) => {
             const el = section[0]
-            return <SectionWrapper key={index}>{<el.default />}</SectionWrapper>
+            return (
+              <SectionWrapper key={index} el={el}>
+                {<el.default />}
+              </SectionWrapper>
+            )
           })}
         </ArticleWrapper>
       ))}
@@ -120,5 +124,7 @@ export const Section = styled.section`
 `
 
 const SectionWrapper = (props) => {
-  return <Section>{props.children}</Section>
+  return (
+    <Section className={props.el.type || "simple"}>{props.children}</Section>
+  )
 }
