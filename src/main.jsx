@@ -9,8 +9,8 @@ import "@/global/reset.css"
 import "@/global/index.css"
 import "@/global/App.css"
 
-import { Card, Container } from "@/components/Card"
-import { Headline, SubHeadline, Title } from "@/components/Title"
+import { Card, Container } from "@/components/styled/Card"
+import { Headline, SubHeadline, Title } from "@/components/styled/Title"
 
 const GlobalStyle = createGlobalStyle`
   h1, h2, h3, h4, h5, h6, p, li, label, th, td {

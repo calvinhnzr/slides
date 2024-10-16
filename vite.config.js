@@ -16,6 +16,7 @@ export default defineConfig(async ({ command, mode }) => {
         "@": path.resolve(__dirname, "./src"),
         assets: path.resolve(__dirname, "./src/assets"),
         components: path.resolve(__dirname, "./src/components"),
+        styled: path.resolve(__dirname, "./src/components/styled"),
         hooks: path.resolve(__dirname, "./src/hooks"),
         slides: path.resolve(__dirname, "./src/slides"),
         store: path.resolve(__dirname, "./src/store"),

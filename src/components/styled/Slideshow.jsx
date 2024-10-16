@@ -1,8 +1,4 @@
-// import { styled } from "styled-components"
-import styled from "@emotion/styled"
-
-import { useAtom } from "jotai"
-import { MIN_VALUE, MAX_VALUE, currentSlideAtom } from "@/store/atoms"
+import { styled } from "styled-components"
 import { COLOR_BACKGROUND, COLOR_BACKGROUND_DARK } from "@/store/base"
 import "@/global/Slide.css"
 
@@ -10,18 +6,12 @@ import "@/global/Slide.css"
 export const Main = styled.main`
   height: 100%;
   width: 100%;
-
   display: flex;
   flex-direction: row;
   transition: 0.5s transform linear;
   will-change: transform;
   transform: translateX(${(props) => props.$currentSlideX * -100}%);
 `
-
-// export const Slideshow = (props) => {
-//   const [currentSlide, setCurrentSlide] = useAtom(currentSlideAtom)
-//   return <Main currentSlideX={currentSlide.x}>{props.children}</Main>
-// }
 
 // Horizontal Srcoll
 export const Article = styled.article`
@@ -33,6 +23,7 @@ export const Article = styled.article`
     flex-direction: column;
     transition: 0.5s transform linear;
     will-change: transform;
+    /* only trigger animation when scroll down not sideways */
     transform: translateY(${(props) => props.$currentSlideY * -100}%);
   }
   background-color: ${COLOR_BACKGROUND};
@@ -41,12 +32,6 @@ export const Article = styled.article`
   }
 `
 
-// export const StylesArticle = () => {
-//   const [currentVertical] = useAtom(currentVerticalAtom)
-//   return <Article currentVertical={currentVertical}>{props.children}</Article>
-// }
-
-// layout
 export const Grid = styled.section`
   width: 100%;
   height: 100%;

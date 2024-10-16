@@ -1,15 +1,15 @@
 import { atom } from "jotai"
 
 const slidesModule = [
-  (p) => import("@/slides/slide-000.mdx"),
-  (p) => import("@/slides/slide-010.mdx"),
-  (p) => import("@/slides/slide-020.mdx"),
-  (p) => import("@/slides/slide-030.mdx"),
-  (p) => import("@/slides/slide-040.mdx"),
-  (p) => import("@/slides/slide-050.mdx"),
-  (p) => import("@/slides/slide-060.mdx"),
-  (p) => import("@/slides/slide-070.mdx"),
-  (p) => import("@/slides/slide-080.mdx"),
+  () => import("@/slides/slide-000.mdx"),
+  () => import("@/slides/slide-010.mdx"),
+  () => import("@/slides/slide-020.mdx"),
+  () => import("@/slides/slide-030.mdx"),
+  () => import("@/slides/slide-040.mdx"),
+  () => import("@/slides/slide-050.mdx"),
+  () => import("@/slides/slide-060.mdx"),
+  () => import("@/slides/slide-070.mdx"),
+  () => import("@/slides/slide-080.mdx"),
 ]
 
 const initialY = new Array(slidesModule.length).fill(0)
@@ -25,14 +25,8 @@ export const slidesAtom = atom(async (get) => {
   return loadedSlides
 })
 
-// example
-// const currentSlideAtom = {
-//   x: 1, // value = current position of horizontal slide
-//   y: [0, 0, 1, 2, 0, 1, 0, 0], // length = num of Slides; value = current position of vertical slide
-// }
-
 export const MIN_VALUE = 0
-export const MAX_VALUE = slidesModule.length //- 1
+export const MAX_VALUE = slidesModule.length - 1
 
 // currentXCountAtom
 export const currentHorizontalAtom = atom(0, (get, set, update) => {
