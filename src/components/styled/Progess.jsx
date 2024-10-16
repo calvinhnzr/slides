@@ -1,5 +1,5 @@
-import styled from "styled-components"
-import { COLOR_ACCENT, COLOR_BACKGROUND } from "@/store/base"
+import styled from "@emotion/styled"
+import { COLOR_ACCENT, COLOR_BACKGROUND } from "@store/base"
 
 const myDarkGrey = COLOR_BACKGROUND
 const myBlue = COLOR_ACCENT

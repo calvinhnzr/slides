@@ -1,6 +1,6 @@
-import styled from "styled-components"
+import styled from "@emotion/styled"
 
-import { COLOR_BACKGROUND_DARK } from "@/store/base"
+import { COLOR_BACKGROUND_DARK } from "@store/base"
 
 export const Container = styled.div`
   /* outline: 1px solid red; */

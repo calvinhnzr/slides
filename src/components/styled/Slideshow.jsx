@@ -1,6 +1,6 @@
-import { styled } from "styled-components"
-import { COLOR_BACKGROUND, COLOR_BACKGROUND_DARK } from "@/store/base"
-import "@/global/Slide.css"
+import styled from "@emotion/styled"
+import { COLOR_BACKGROUND, COLOR_BACKGROUND_DARK } from "@store/base"
+import "@styles/Slide.css"
 
 // Vertical Srcoll
 export const Main = styled.main`

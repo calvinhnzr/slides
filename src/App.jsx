@@ -1,14 +1,19 @@
 import { useRef, useEffect } from "react"
 import { useAtom } from "jotai"
 
-import { currentSlideAtom, MAX_VALUE, slidesAtom } from "@/store/atoms"
+import "./styles/reset.css"
+import "./styles/index.css"
+import "./styles/App.css"
+import "./styles/Slide.css"
 
-import useGamepad from "@/hooks/useGamepad"
-import useKeyDown from "@/hooks/useKeydown"
-import useFullscreen from "@/hooks/useFullScreen"
+import { currentSlideAtom, MAX_VALUE, slidesAtom } from "@store/atoms"
 
-import { Main, Article, Grid } from "@/components/styled/Slideshow"
-import { Progress } from "@/components/styled/Progess"
+import useGamepad from "@hooks/useGamepad"
+import useKeyDown from "@hooks/useKeydown"
+import useFullscreen from "@hooks/useFullScreen"
+
+import { Main, Article, Grid } from "@components/styled/Slideshow"
+import { Progress } from "@components/styled/Progess"
 
 export function App() {
   const { buttons, axes } = useGamepad(true)
@@ -84,22 +89,22 @@ export function App() {
 
   return (
     <>
+      <Progress max={MAX_VALUE} value={currentSlide.x} />
       <Main $currentSlideX={currentSlide.x}>
-        {slidesData.map((el, index) => (
+        {/* {slidesData.map((el, index) => (
           <Article
             key={index}
             className={el.layout || "normal"}
-            // saves index of x not from current slide, rather in mapping from mdx files
+            saves index of x not from current slide, rather in mapping from mdx files
             $currentSlideY={currentSlide.y[currentSlide.x]}
           >
-            {/* render grid based on num of subfolders */}
+            render grid based on num of subfolders 
             <Grid layout={el.layout} className={el.slideClasses || "simple"}>
               <el.default />
             </Grid>
           </Article>
-        ))}
+        ))} */}
       </Main>
-      <Progress max={MAX_VALUE} value={currentSlide.x} />
     </>
   )
 }

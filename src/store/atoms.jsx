@@ -1,15 +1,15 @@
 import { atom } from "jotai"
 
 const slidesModule = [
-  () => import("@/slides/slide-000.mdx"),
-  () => import("@/slides/slide-010.mdx"),
-  () => import("@/slides/slide-020.mdx"),
-  () => import("@/slides/slide-030.mdx"),
-  () => import("@/slides/slide-040.mdx"),
-  () => import("@/slides/slide-050.mdx"),
-  () => import("@/slides/slide-060.mdx"),
-  () => import("@/slides/slide-070.mdx"),
-  () => import("@/slides/slide-080.mdx"),
+  () => import("@slides/slide-000.mdx"),
+  () => import("@slides/slide-010.mdx"),
+  () => import("@slides/slide-020.mdx"),
+  () => import("@slides/slide-030.mdx"),
+  () => import("@slides/slide-040.mdx"),
+  () => import("@slides/slide-050.mdx"),
+  () => import("@slides/slide-060.mdx"),
+  () => import("@slides/slide-070.mdx"),
+  () => import("@slides/slide-080.mdx"),
 ]
 
 const initialY = new Array(slidesModule.length).fill(0)
