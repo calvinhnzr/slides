@@ -1,3 +1,4 @@
+/* Section Class */
 .intro {
   h1 {
     grid-column: 2 / 12;
@@ -12,6 +13,7 @@
   }
 }
 
+/* Section Class */
 .simple {
   h3 {
     grid-column: 2 / 12;
@@ -21,6 +23,7 @@
   }
 }
 
+/* Section Class */
 .center {
   > * {
     grid-column: 2 / 12;
