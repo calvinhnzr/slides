@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-import { COLOR_BACKGROUND_DARK } from "@/store/base"
+import { COLOR_BACKGROUND } from "@/store/base"
 
 export const Container = styled.div`
   /* outline: 1px solid red; */
@@ -14,6 +14,6 @@ export const Container = styled.div`
 export const Card = styled.div`
   /* outline: 1px solid blue; */
   grid-column: span 5;
-  background-color: ${COLOR_BACKGROUND_DARK};
+  background-color: ${COLOR_BACKGROUND};
   border-radius: 0.5rem;
 `
