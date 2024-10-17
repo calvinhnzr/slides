@@ -33,6 +33,50 @@ const Main = styled.main`
   }
 `
 
+// Horizontal Srcoll
+const Article = styled.article`
+  width: 100%;
+  height: 100%;
+  flex: 0 0 auto;
+
+  flex-direction: column;
+  will-change: transform;
+  transition: 0.5s transform linear;
+
+  transform: translateY(${(props) => props.currentSection * -100}%);
+
+  background-color: ${COLOR_BACKGROUND};
+  &:first-of-type {
+    background-color: ${COLOR_BACKGROUND_DARK};
+  }
+  &.explosion {
+    /* outline: 0.5rem solid blue; */
+    /* transition: none; */
+    transition: calc(0.5s / 4) transform linear;
+    display: flex;
+    gap: ${GAP_EXPLOSION}rem 0;
+    transform: translateY(
+      calc(
+        ${(props) => props.currentSection * -100}% -
+          ${(props) => props.currentSection * props.gap}rem
+      )
+    );
+  }
+`
+
+export const Section = styled.section`
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  gap: 1rem;
+  z-index: 70;
+  &.explosion {
+    outline: 0.4rem solid white;
+  }
+`
+
 export const Slideshow = ({ data, max }) => {
   const [currentArticle, setCurrentArticle] = useAtom(currentArticleAtom)
   const [explosionView] = useAtom(explosionViewAtom)
@@ -90,37 +134,6 @@ export const Slideshow = ({ data, max }) => {
   )
 }
 
-// Horizontal Srcoll
-const Article = styled.article`
-  width: 100%;
-  height: 100%;
-  flex: 0 0 auto;
-
-  flex-direction: column;
-  will-change: transform;
-  transition: 0.5s transform linear;
-
-  transform: translateY(${(props) => props.currentSection * -100}%);
-
-  background-color: ${COLOR_BACKGROUND};
-  &:first-of-type {
-    background-color: ${COLOR_BACKGROUND_DARK};
-  }
-  &.explosion {
-    /* outline: 0.5rem solid blue; */
-    /* transition: none; */
-    transition: calc(0.5s / 4) transform linear;
-    display: flex;
-    gap: ${GAP_EXPLOSION}rem 0;
-    transform: translateY(
-      calc(
-        ${(props) => props.currentSection * -100}% -
-          ${(props) => props.currentSection * props.gap}rem
-      )
-    );
-  }
-`
-
 const ArticleWrapper = (props) => {
   const [currentSection, setCurrentSection] = useState(0)
   const [explosionView] = useAtom(explosionViewAtom)
@@ -162,19 +175,6 @@ const ArticleWrapper = (props) => {
     </Article>
   )
 }
-
-export const Section = styled.section`
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(12, 1fr);
-  gap: 1rem;
-  z-index: 70;
-  &.explosion {
-    outline: 0.4rem solid white;
-  }
-`
 
 const SectionWrapper = (props) => {
   const [explosionView] = useAtom(explosionViewAtom)
