@@ -23,14 +23,12 @@ const Div = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
-  /* background-color: #202123; */
 
+  background-color: #2e3034;
   &.explosion {
     transform-origin: center;
     transform: scale(0.15);
     overflow: visible;
-    /* border: 1rem solid white; */
-    /* padding-left: -10rem; */
     position: relative;
     &::before {
       content: "";

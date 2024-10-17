@@ -1,13 +1,25 @@
-export const COLOR_TH_RED = "#CF1820"
-export const COLOR_TH_ORANGE = "#EC6525"
-export const COLOR_TH_PURPLE = "#AF368C"
+// COLOR
+const TH_COLOR_RED = "#CF1820"
+const TH_COLOR_ORANGE = "#EC6525"
+const TH_COLOR_PURPLE = "#AF368C"
 
-export const COLOR_GREEN = "#65D677"
-export const COLOR_BLUE = "cornflowerblue"
-export const COLOR_ORANGE = "coral"
+const JOYCON_COLOR_PURPLE = "#F0CBEB"
+const JOYCON_COLOR_PURPLE_DARK = "#373037"
+const JOYCON_COLOR_GREEN = "#BCFFC8"
+const JOYCON_COLOR_GREEN_DARK = "#2D322D"
 
-export const COLOR_BACKGROUND = "#202123"
-export const COLOR_BACKGROUND_DARK = "#191a1b"
-export const COLOR_ACCENT = COLOR_BACKGROUND_DARK
+const COLOR_GREEN = "#65d677"
+const COLOR_BLUE = "cornflowerblue"
+const COLOR_ORANGE = "coral"
 
-export const GAP_EXPLOSION = 10
+const COLOR_GRAY_DARK = "#2e3034"
+const COLOR_GRAY_DARKER = "#202123"
+const COLOR_GRAY_DARKEST = "#191a1b"
+
+export const COLOR_BACKGROUND_EXPLOSION = COLOR_GRAY_DARKER
+export const COLOR_BACKGROUND = COLOR_GRAY_DARK
+export const COLOR_BACKGROUND_INTRO = COLOR_GRAY_DARKEST
+export const COLOR_ACCENT = JOYCON_COLOR_GREEN
+
+// SPACING
+export const GAP_EXPLOSION = 10 //rem

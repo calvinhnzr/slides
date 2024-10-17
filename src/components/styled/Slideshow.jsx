@@ -3,12 +3,13 @@ import { useAtom } from "jotai"
 import { styled } from "styled-components"
 import classNames from "classnames"
 import {
+  COLOR_BACKGROUND_EXPLOSION,
   COLOR_BACKGROUND,
-  COLOR_BACKGROUND_DARK,
-  GAP_EXPLOSION,
+  COLOR_BACKGROUND_INTRO,
 } from "@/store/base"
 import { currentArticleAtom, explosionViewAtom } from "@/store/atoms"
 import "@/styles/Slide.css"
+import { GAP_EXPLOSION } from "../../store/base"
 
 // Vertical Srcoll
 const Main = styled.main`
@@ -29,12 +30,6 @@ const Main = styled.main`
     /* transition: none; */
     gap: 0 ${GAP_EXPLOSION}rem;
     transition: calc(0.5s / 4) transform linear;
-    transform: translateX(
-      calc(
-        ${(props) => props.currentArticle * -100}% -
-          ${(props) => props.currentArticle * props.gap}rem
-      )
-    );
   }
 `
 
@@ -52,7 +47,7 @@ const Article = styled.article`
   flex-direction: column;
   will-change: transform;
   transition: 0.5s transform linear;
-  gap: 10rem;
+  gap: ${GAP_EXPLOSION}rem;
   transform: translateY(
     calc(
       ${(props) => props.currentSection * -100}% -
@@ -60,22 +55,13 @@ const Article = styled.article`
     )
   );
 
-  background-color: ${COLOR_BACKGROUND};
-  &:first-of-type {
-    background-color: ${COLOR_BACKGROUND_DARK};
+  &:first-child > section {
+    background-color: ${COLOR_BACKGROUND_INTRO};
   }
+
   &.explosion {
-    /* outline: 0.5rem solid blue; */
-    /* transition: none; */
     transition: calc(0.5s / 4) transform linear;
     display: flex;
-    gap: ${GAP_EXPLOSION}rem 0;
-    transform: translateY(
-      calc(
-        ${(props) => props.currentSection * -100}% -
-          ${(props) => props.currentSection * props.gap}rem
-      )
-    );
   }
 `
 
@@ -87,7 +73,8 @@ export const Section = styled.section`
   grid-template-rows: repeat(12, 1fr);
   gap: 1rem;
   z-index: 1;
-  background-color: #2e3034;
+  background-color: ${COLOR_BACKGROUND};
+
   &.explosion {
     outline: 0.4rem solid white;
   }
