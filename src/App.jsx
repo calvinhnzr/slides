@@ -23,9 +23,10 @@ const Div = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: #202123;
-  z-index: 100;
+  /* background-color: #202123; */
+
   &.explosion {
+    transform-origin: center;
     transform: scale(0.15);
     overflow: visible;
     /* border: 1rem solid white; */

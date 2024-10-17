@@ -18,8 +18,13 @@ const Main = styled.main`
   flex-direction: row;
   will-change: transform;
   transition: 0.5s transform linear;
-
-  transform: translateX(${(props) => props.currentArticle * -100}%);
+  gap: 0 10rem;
+  transform: translateX(
+    calc(
+      ${(props) => props.currentArticle * -100}% -
+        ${(props) => props.currentArticle * props.gap}rem
+    )
+  );
   &.explosion {
     /* transition: none; */
     gap: 0 ${GAP_EXPLOSION}rem;
@@ -37,13 +42,23 @@ const Main = styled.main`
 const Article = styled.article`
   width: 100%;
   height: 100%;
-  flex: 0 0 auto;
+  /* flex: 0 0 auto; */
+  display: flex;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
 
+  z-index: 10;
   flex-direction: column;
   will-change: transform;
   transition: 0.5s transform linear;
-
-  transform: translateY(${(props) => props.currentSection * -100}%);
+  gap: 10rem;
+  transform: translateY(
+    calc(
+      ${(props) => props.currentSection * -100}% -
+        ${(props) => props.currentSection * props.gap}rem
+    )
+  );
 
   background-color: ${COLOR_BACKGROUND};
   &:first-of-type {
@@ -71,7 +86,8 @@ export const Section = styled.section`
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(12, 1fr);
   gap: 1rem;
-  z-index: 70;
+  z-index: 1;
+  background-color: #2e3034;
   &.explosion {
     outline: 0.4rem solid white;
   }
