@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react"
 import { useAtom } from "jotai"
-import styled from "@emotion/styled"
-import { COLOR_BACKGROUND, COLOR_BACKGROUND_DARK } from "@/store/base"
-import { currentArticleAtom } from "@/store/atoms"
+import { styled } from "styled-components"
+import classNames from "classnames"
+import {
+  COLOR_BACKGROUND,
+  COLOR_BACKGROUND_DARK,
+  GAP_EXPLOSION,
+} from "@/store/base"
+import { currentArticleAtom, explosionViewAtom } from "@/store/atoms"
 import "@/styles/Slide.css"
 
 // Vertical Srcoll
@@ -11,13 +16,29 @@ const Main = styled.main`
   width: 100%;
   display: flex;
   flex-direction: row;
-  transition: 0.5s transform linear;
   will-change: transform;
+  transition: 0.5s transform linear;
+
   transform: translateX(${(props) => props.currentArticle * -100}%);
+  &.explosion {
+    /* transition: none; */
+    gap: 0 ${GAP_EXPLOSION}rem;
+    transition: calc(0.5s / 4) transform linear;
+    transform: translateX(
+      calc(
+        ${(props) => props.currentArticle * -100}% -
+          ${(props) => props.currentArticle * props.gap}rem
+      )
+    );
+  }
 `
 
 export const Slideshow = ({ data, max }) => {
   const [currentArticle, setCurrentArticle] = useAtom(currentArticleAtom)
+  const [explosionView] = useAtom(explosionViewAtom)
+  const mainClassNames = classNames({
+    explosion: explosionView,
+  })
 
   const handleKeyDown = (event) => {
     switch (event.key) {
@@ -43,7 +64,11 @@ export const Slideshow = ({ data, max }) => {
   }, [handleKeyDown])
 
   return (
-    <Main currentArticle={currentArticle}>
+    <Main
+      currentArticle={currentArticle}
+      className={mainClassNames}
+      gap={GAP_EXPLOSION}
+    >
       {data.map((article, index) => (
         <ArticleWrapper
           key={index}
@@ -72,18 +97,36 @@ const Article = styled.article`
   flex: 0 0 auto;
 
   flex-direction: column;
-  transition: 0.5s transform linear;
   will-change: transform;
+  transition: 0.5s transform linear;
+
   transform: translateY(${(props) => props.currentSection * -100}%);
 
   background-color: ${COLOR_BACKGROUND};
   &:first-of-type {
     background-color: ${COLOR_BACKGROUND_DARK};
   }
+  &.explosion {
+    /* outline: 0.5rem solid blue; */
+    /* transition: none; */
+    transition: calc(0.5s / 4) transform linear;
+    display: flex;
+    gap: ${GAP_EXPLOSION}rem 0;
+    transform: translateY(
+      calc(
+        ${(props) => props.currentSection * -100}% -
+          ${(props) => props.currentSection * props.gap}rem
+      )
+    );
+  }
 `
 
 const ArticleWrapper = (props) => {
   const [currentSection, setCurrentSection] = useState(0)
+  const [explosionView] = useAtom(explosionViewAtom)
+  const articleClassNames = classNames({
+    explosion: explosionView,
+  })
 
   const handleKeyDown = (event) => {
     switch (event.key) {
@@ -109,7 +152,15 @@ const ArticleWrapper = (props) => {
     }
   }, [handleKeyDown])
 
-  return <Article currentSection={currentSection}>{props.children}</Article>
+  return (
+    <Article
+      currentSection={currentSection}
+      className={articleClassNames}
+      gap={GAP_EXPLOSION}
+    >
+      {props.children}
+    </Article>
+  )
 }
 
 export const Section = styled.section`
@@ -119,10 +170,19 @@ export const Section = styled.section`
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(12, 1fr);
   gap: 1rem;
+  z-index: 70;
+  &.explosion {
+    outline: 0.4rem solid white;
+  }
 `
 
 const SectionWrapper = (props) => {
-  return (
-    <Section className={props.el.type || "simple"}>{props.children}</Section>
-  )
+  const [explosionView] = useAtom(explosionViewAtom)
+
+  const sectionClassNames = classNames({
+    explosion: explosionView,
+    [props.el.type || "simple"]: true,
+  })
+
+  return <Section className={sectionClassNames}>{props.children}</Section>
 }
