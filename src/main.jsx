@@ -29,20 +29,20 @@ function shouldForwardProp(propName, target) {
 }
 
 createRoot(document.getElementById("root")).render(
-  // <StrictMode>
-  <MDXProvider
-    components={{
-      h1: Headline,
-      h2: SubHeadline,
-      h3: Title,
-      Card,
-      Container,
-    }}
-  >
-    <StyleSheetManager shouldForwardProp={shouldForwardProp}>
-      <GlobalStyle />
-      <App />
-    </StyleSheetManager>
-  </MDXProvider>
-  // </StrictMode>
+  <StrictMode>
+    <MDXProvider
+      components={{
+        h1: Headline,
+        h2: SubHeadline,
+        h3: Title,
+        Card,
+        Container,
+      }}
+    >
+      <StyleSheetManager shouldForwardProp={shouldForwardProp}>
+        <GlobalStyle />
+        <App />
+      </StyleSheetManager>
+    </MDXProvider>
+  </StrictMode>
 )

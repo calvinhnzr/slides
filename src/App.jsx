@@ -17,6 +17,7 @@ export function App() {
   const MAX_VALUE = slidesData[0].length - 1
   const [isFullscreen, toggleFullscreen] = useFullscreen()
   const { buttons, axes } = useGamepad(true)
+
   useKeyDown((event) => {
     switch (event.key) {
       case "f":
