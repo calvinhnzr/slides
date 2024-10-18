@@ -1,7 +1,7 @@
 import styled from "styled-components"
-import { COLOR_ACCENT, COLOR_BACKGROUND } from "@/store/base"
+import { COLOR_ACCENT, COLOR_BACKGROUND_INTRO } from "@/store/base"
 
-const myDarkGrey = COLOR_BACKGROUND
+const myDarkGrey = COLOR_BACKGROUND_INTRO
 const myBlue = COLOR_ACCENT
 
 export const Progress = styled.progress`

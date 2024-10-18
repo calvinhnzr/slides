@@ -15,11 +15,13 @@ import { GAP_EXPLOSION } from "../../store/base"
 const Main = styled.main`
   height: 100%;
   width: 100%;
+
   display: flex;
   flex-direction: row;
-  will-change: transform;
-  transition: 0.5s transform linear;
   gap: 0 10rem;
+
+  transition: 0.5s transform linear;
+  will-change: transform;
   transform: translateX(
     calc(
       ${(props) => props.currentArticle * -100}% -
@@ -27,7 +29,6 @@ const Main = styled.main`
     )
   );
   &.explosion {
-    /* transition: none; */
     gap: 0 ${GAP_EXPLOSION}rem;
     transition: calc(0.5s / 4) transform linear;
   }
@@ -37,27 +38,28 @@ const Main = styled.main`
 const Article = styled.article`
   width: 100%;
   height: 100%;
-  /* flex: 0 0 auto; */
+  &:first-child > section {
+    background-color: ${COLOR_BACKGROUND_INTRO};
+  }
+  &:last-child > section {
+    background-color: ${COLOR_BACKGROUND_INTRO};
+  }
+
   display: flex;
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: auto;
-
-  z-index: 10;
   flex-direction: column;
-  will-change: transform;
-  transition: 0.5s transform linear;
   gap: ${GAP_EXPLOSION}rem;
+
+  transition: 0.5s transform linear;
+  will-change: transform;
   transform: translateY(
     calc(
       ${(props) => props.currentSection * -100}% -
         ${(props) => props.currentSection * props.gap}rem
     )
   );
-
-  &:first-child > section {
-    background-color: ${COLOR_BACKGROUND_INTRO};
-  }
 
   &.explosion {
     transition: calc(0.5s / 4) transform linear;
@@ -68,12 +70,12 @@ const Article = styled.article`
 export const Section = styled.section`
   width: 100%;
   height: 100%;
+  background-color: ${COLOR_BACKGROUND};
+
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(12, 1fr);
   gap: 1rem;
-  z-index: 1;
-  background-color: ${COLOR_BACKGROUND};
 
   &.explosion {
     outline: 0.4rem solid white;
@@ -140,6 +142,7 @@ export const Slideshow = ({ data, max }) => {
 const ArticleWrapper = (props) => {
   const [currentSection, setCurrentSection] = useState(0)
   const [explosionView] = useAtom(explosionViewAtom)
+
   const articleClassNames = classNames({
     explosion: explosionView,
   })
@@ -185,6 +188,7 @@ const SectionWrapper = (props) => {
   const sectionClassNames = classNames({
     explosion: explosionView,
     [props.el.type || "simple"]: true,
+    currentSlide: props.isCurrentSlide,
   })
 
   return <Section className={sectionClassNames}>{props.children}</Section>
