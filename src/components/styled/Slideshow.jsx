@@ -31,7 +31,6 @@ const Div = styled.div`
       height: 100%;
       width: 100%;
       outline: 2rem solid white;
-      z-index: 10;
     }
   }
 `
