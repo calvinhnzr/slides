@@ -13,14 +13,13 @@ import {
 import * as THREE from "three"
 import styled from "styled-components"
 
-export const Scene = () => {
+export const Scene = (props) => {
   return (
     <>
-      <CameraControls />
-
+      {props.children}
       <ambientLight intensity={1} />
       <Stars />
-      <Center visible={false}>
+      <Center visible={true}>
         {[...Array(3)].map((_, i) => (
           <RoundedBox
             key={i}

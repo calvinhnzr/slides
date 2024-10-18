@@ -11,6 +11,31 @@ import { currentArticleAtom, explosionViewAtom } from "@/store/atoms"
 import "@/styles/Slide.css"
 import { GAP_EXPLOSION } from "../../store/base"
 
+// Explosion
+const Div = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: ${COLOR_BACKGROUND};
+  &.explosion {
+    transform-origin: center;
+    transform: scale(0.15);
+    overflow: visible;
+    background-color: ${COLOR_BACKGROUND_EXPLOSION};
+    &::before {
+      content: "";
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      outline: 2rem solid white;
+      z-index: 10;
+    }
+  }
+`
+
 // Vertical Srcoll
 const Main = styled.main`
   height: 100%;
@@ -113,29 +138,31 @@ export const Slideshow = ({ data, max }) => {
   }, [handleKeyDown])
 
   return (
-    <Main
-      currentArticle={currentArticle}
-      className={mainClassNames}
-      gap={GAP_EXPLOSION}
-    >
-      {data.map((article, index) => (
-        <ArticleWrapper
-          key={index}
-          index={index}
-          max={article.length - 1}
-          currentArticle={currentArticle}
-        >
-          {article.map((section, index) => {
-            const el = section[0]
-            return (
-              <SectionWrapper key={index} el={el}>
-                {<el.default />}
-              </SectionWrapper>
-            )
-          })}
-        </ArticleWrapper>
-      ))}
-    </Main>
+    <Div className={mainClassNames}>
+      <Main
+        currentArticle={currentArticle}
+        className={mainClassNames}
+        gap={GAP_EXPLOSION}
+      >
+        {data.map((article, index) => (
+          <ArticleWrapper
+            key={index}
+            index={index}
+            max={article.length - 1}
+            currentArticle={currentArticle}
+          >
+            {article.map((section, index) => {
+              const el = section[0]
+              return (
+                <SectionWrapper key={index} el={el}>
+                  {<el.default />}
+                </SectionWrapper>
+              )
+            })}
+          </ArticleWrapper>
+        ))}
+      </Main>
+    </Div>
   )
 }
 

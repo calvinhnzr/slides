@@ -2,7 +2,7 @@ import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
 import { MDXProvider } from "@mdx-js/react"
 import isPropValid from "@emotion/is-prop-valid"
-import { View } from "@react-three/drei"
+import { View, Box, CameraControls } from "@react-three/drei"
 import { StyleSheetManager, createGlobalStyle } from "styled-components"
 
 import { App } from "./App.jsx"
@@ -12,6 +12,7 @@ import "@/styles/index.css"
 
 import { Card, Container } from "@/components/styled/Card"
 import { Headline, SubHeadline, Title } from "@/components/styled/Title"
+import { Scene } from "@/components/render/Scene"
 
 const GlobalStyle = createGlobalStyle`
   h1, h2, h3, h4, h5, h6, p, li, label, th, td {
@@ -39,6 +40,9 @@ createRoot(document.getElementById("root")).render(
         Card,
         Container,
         View,
+        Scene,
+        Box,
+        CameraControls,
       }}
     >
       <StyleSheetManager shouldForwardProp={shouldForwardProp}>

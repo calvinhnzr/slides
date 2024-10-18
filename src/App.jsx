@@ -1,8 +1,9 @@
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { useAtom } from "jotai"
 import classNames from "classnames"
 import { styled } from "styled-components"
 import { Canvas } from "@react-three/fiber"
+import { Box, View, CameraControls } from "@react-three/drei"
 
 import {
   slidesAtom,
@@ -21,31 +22,6 @@ import { Progress } from "@/components/styled/Progress"
 
 import { Scene } from "@/components/render/Scene"
 
-const Div = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background-color: ${COLOR_BACKGROUND};
-  &.explosion {
-    transform-origin: center;
-    transform: scale(0.15);
-    overflow: visible;
-    position: relative;
-    background-color: ${COLOR_BACKGROUND_EXPLOSION};
-    &::before {
-      content: "";
-      position: absolute;
-      height: 100%;
-      width: 100%;
-      outline: 2rem solid white;
-      z-index: 10;
-    }
-  }
-`
-
 export function App() {
   const [slidesData] = useAtom(slidesAtom)
   const [currentArticle] = useAtom(currentArticleAtom)
@@ -54,6 +30,8 @@ export function App() {
   const MAX_VALUE = slidesData[0].length - 1
   const [isFullscreen, toggleFullscreen] = useFullscreen()
   const { buttons, axes } = useGamepad(true)
+
+  const appRef = useRef()
 
   useKeyDown((event) => {
     switch (event.key) {
@@ -90,26 +68,18 @@ export function App() {
     if (buttons[4] || buttons[5]) setExplosionView(!explosionView)
   }, [buttons, axes])
 
-  const appClassNames = classNames({
-    explosion: explosionView,
-  })
-
   return (
+    // <div id="app" ref={appRef}>
     <>
-      <Div id="app" className={appClassNames}>
-        <Slideshow data={slidesData[0]} max={MAX_VALUE} />
-
-        {!explosionView ? (
-          <Progress max={MAX_VALUE} value={currentArticle} />
-        ) : null}
-      </Div>
-      <div id="canvas">
-        <Canvas>
-          <Scene />
-          {/* <View.Port /> */}
-        </Canvas>
-      </div>
+      <Slideshow data={slidesData[0]} max={MAX_VALUE} />
+      {!explosionView ? (
+        <Progress max={MAX_VALUE} value={currentArticle} />
+      ) : null}
+      <Canvas id="canvas" eventSource={document.getElementById("root")}>
+        <View.Port />
+      </Canvas>
     </>
+    // </div>
   )
 }
 
