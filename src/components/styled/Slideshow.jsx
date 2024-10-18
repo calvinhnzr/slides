@@ -102,8 +102,14 @@ export const Section = styled.section`
   grid-template-rows: repeat(12, 1fr);
   gap: 1rem;
 
+  flex: none;
   &.explosion {
     outline: 0.4rem solid white;
+  }
+
+  > * {
+    height: 100%;
+    width: 100%;
   }
 `
 

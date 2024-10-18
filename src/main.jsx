@@ -2,7 +2,7 @@ import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
 import { MDXProvider } from "@mdx-js/react"
 import isPropValid from "@emotion/is-prop-valid"
-import { View, Box, CameraControls } from "@react-three/drei"
+import { View, Box, CameraControls, OrbitControls } from "@react-three/drei"
 import { StyleSheetManager, createGlobalStyle } from "styled-components"
 
 import { App } from "./App.jsx"
@@ -43,6 +43,7 @@ createRoot(document.getElementById("root")).render(
         Scene,
         Box,
         CameraControls,
+        OrbitControls,
       }}
     >
       <StyleSheetManager shouldForwardProp={shouldForwardProp}>

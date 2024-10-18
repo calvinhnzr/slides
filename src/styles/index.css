@@ -17,7 +17,7 @@ body,
   top: 0;
   left: 0;
   /* background-color: red; */
-  z-index: 100;
+  /* z-index: 100; */
 }
 
 .canvas-view {
@@ -26,6 +26,6 @@ body,
   position: absolute;
   top: 0;
   left: 0;
-  background-color: #202123;
-  /* z-index: -1; */
+  /* background-color: #202123; */
+  z-index: -1;
 }

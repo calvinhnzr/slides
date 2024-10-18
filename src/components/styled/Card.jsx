@@ -3,7 +3,6 @@ import styled from "styled-components"
 import { COLOR_BACKGROUND_EXPLOSION, COLOR_BACKGROUND } from "@/store/base"
 
 export const Container = styled.div`
-  outline: 1px solid red;
   /* background-color: ${COLOR_BACKGROUND_EXPLOSION}; */
   display: grid;
   grid-template-columns: subgrid;
@@ -12,6 +11,11 @@ export const Container = styled.div`
   gap: 4rem;
   z-index: 1000;
   position: relative;
+
+  &.full {
+    grid-column: 1 / 13;
+    grid-row: 1 / 13;
+  }
 `
 
 export const Card = styled.div`
