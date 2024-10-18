@@ -1,9 +1,10 @@
 import styled from "styled-components"
 
-import { COLOR_BACKGROUND } from "@/store/base"
+import { COLOR_BACKGROUND_EXPLOSION, COLOR_BACKGROUND } from "@/store/base"
 
 export const Container = styled.div`
   /* outline: 1px solid red; */
+  background-color: ${COLOR_BACKGROUND_EXPLOSION};
   display: grid;
   grid-template-columns: subgrid;
   grid-column: 2 / 12;

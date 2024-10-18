@@ -15,7 +15,7 @@ import { GAP_EXPLOSION } from "../../store/base"
 const Main = styled.main`
   height: 100%;
   width: 100%;
-
+  z-index: 10;
   display: flex;
   flex-direction: row;
   gap: 0 10rem;

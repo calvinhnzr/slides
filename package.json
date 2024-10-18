@@ -14,6 +14,7 @@
     "@emotion/styled": "^11.13.0",
     "@mdx-js/react": "^3.0.1",
     "@mdx-js/rollup": "^3.0.1",
+    "@react-spring/three": "^9.7.5",
     "@react-three/drei": "^9.114.3",
     "@react-three/fiber": "^8.17.10",
     "classnames": "^2.5.1",

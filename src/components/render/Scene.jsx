@@ -8,19 +8,19 @@ import {
   RoundedBox,
   PerspectiveCamera,
   Center,
+  Stars,
 } from "@react-three/drei"
 import * as THREE from "three"
-
-import React from "react"
+import styled from "styled-components"
 
 export const Scene = () => {
   return (
-    <Canvas>
+    <>
       <CameraControls />
 
       <ambientLight intensity={1} />
-
-      <Center>
+      <Stars />
+      <Center visible={false}>
         {[...Array(3)].map((_, i) => (
           <RoundedBox
             key={i}
@@ -30,12 +30,12 @@ export const Scene = () => {
             smoothness={4}
             bevelSegments={4}
             creaseAngle={0.4}
-            ref={(el) => (boxesRef.current[i] = el)}
+            // ref={(el) => (boxesRef.current[i] = el)}
           >
             <meshPhongMaterial color="#f3f3f3" />
           </RoundedBox>
         ))}
       </Center>
-    </Canvas>
+    </>
   )
 }

@@ -2,12 +2,15 @@ import { useEffect } from "react"
 import { useAtom } from "jotai"
 import classNames from "classnames"
 import { styled } from "styled-components"
-import "@/styles/Slide.css"
+import { Canvas } from "@react-three/fiber"
+
 import {
   slidesAtom,
   currentArticleAtom,
   explosionViewAtom,
 } from "@/store/atoms"
+
+import { COLOR_BACKGROUND, COLOR_BACKGROUND_EXPLOSION } from "@/store/base"
 
 import useGamepad from "@/hooks/useGamepad"
 import useKeyDown from "@/hooks/useKeydown"
@@ -16,6 +19,8 @@ import useFullscreen from "@/hooks/useFullScreen"
 import { Slideshow } from "@/components/styled/Slideshow"
 import { Progress } from "@/components/styled/Progress"
 
+import { Scene } from "@/components/render/Scene"
+
 const Div = styled.div`
   position: fixed;
   top: 0;
@@ -23,13 +28,13 @@ const Div = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
-
-  background-color: #2e3034;
+  background-color: ${COLOR_BACKGROUND};
   &.explosion {
     transform-origin: center;
     transform: scale(0.15);
     overflow: visible;
     position: relative;
+    background-color: ${COLOR_BACKGROUND_EXPLOSION};
     &::before {
       content: "";
       position: absolute;
@@ -90,12 +95,21 @@ export function App() {
   })
 
   return (
-    <Div id="app" className={appClassNames}>
-      <Slideshow data={slidesData[0]} max={MAX_VALUE} />
-      {!explosionView ? (
-        <Progress max={MAX_VALUE} value={currentArticle} />
-      ) : null}
-    </Div>
+    <>
+      <Div id="app" className={appClassNames}>
+        <Slideshow data={slidesData[0]} max={MAX_VALUE} />
+
+        {!explosionView ? (
+          <Progress max={MAX_VALUE} value={currentArticle} />
+        ) : null}
+      </Div>
+      <div id="canvas">
+        <Canvas>
+          <Scene />
+          {/* <View.Port /> */}
+        </Canvas>
+      </div>
+    </>
   )
 }
 
