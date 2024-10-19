@@ -13,6 +13,7 @@ export const Container = styled.div`
   position: relative;
 
   &.full {
+    outline: 1px solid red;
     grid-column: 1 / 13;
     grid-row: 1 / 13;
   }
