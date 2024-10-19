@@ -23,6 +23,8 @@ export const Container = styled.div`
     /* border: 5px solid #ffca81; */
     /* background-color: ${COLOR_BACKGROUND_EXPLOSION}; */
     background: #4c5869;
+    /* background: #dfc5a4; */
+    border-radius: 1rem;
     grid-column: 8 / 12;
     grid-row: 3 / 11;
   }

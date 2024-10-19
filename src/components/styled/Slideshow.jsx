@@ -22,8 +22,6 @@ const Div = styled.div`
   background-color: ${COLOR_BACKGROUND};
   background: #626f82;
   will-change: transform;
-  &::before {
-  }
 
   &.explosion {
     transform-origin: center;
@@ -37,8 +35,8 @@ const Div = styled.div`
       position: absolute;
       height: 100%;
       width: 100%;
-      /* background-color: ${COLOR_BACKGROUND}; */
-      z-index: 10;
+
+      z-index: 1;
       background: none;
       outline: 2rem solid white;
     }

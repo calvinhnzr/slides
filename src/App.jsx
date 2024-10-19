@@ -103,9 +103,30 @@ export function App() {
 
   return (
     <>
-      <View className="canvas-background">
+      {/* <View className="canvas-background">
         <CameraControls domElement={document.getElementById("root")} />
-        {/* <CustomView /> */}
+      </View> */}
+      <div id="app">
+        <Slideshow data={slidesData[0]} max={MAX_VALUE} />
+      </div>
+
+      <Canvas
+        className="canvas canvas-view"
+        eventSource={document.getElementById("root")}
+      >
+        {explosionView ? <Perf position={"top-left"} /> : null}
+        <View.Port />
+      </Canvas>
+
+      {!explosionView ? (
+        <Progress max={MAX_VALUE} value={currentArticle} />
+      ) : null}
+
+      <Canvas
+        className="canvas canvas-background"
+        // eventSource={document.getElementById("root")}
+      >
+        {/* <CameraControls makeDefault /> */}
         <Stars
           radius={120}
           depth={10}
@@ -115,18 +136,7 @@ export function App() {
           fade
           speed={1}
         />
-        {/* <Html></Html> */}
-      </View>
-      <Canvas id="canvas" eventSource={document.getElementById("root")}>
-        {explosionView ? <Perf position={"top-left"} /> : null}
-        <View.Port />
       </Canvas>
-      <div id="app">
-        <Slideshow data={slidesData[0]} max={MAX_VALUE} />
-      </div>
-      {!explosionView ? (
-        <Progress max={MAX_VALUE} value={currentArticle} />
-      ) : null}
     </>
   )
 }
