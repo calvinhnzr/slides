@@ -3,7 +3,8 @@ import { useAtom } from "jotai"
 import classNames from "classnames"
 import { styled } from "styled-components"
 import { Canvas } from "@react-three/fiber"
-import { Box, View, CameraControls } from "@react-three/drei"
+import { Box, View, CameraControls, Stars, Stage } from "@react-three/drei"
+import { Perf } from "r3f-perf"
 
 import {
   slidesAtom,
@@ -69,17 +70,18 @@ export function App() {
   }, [buttons, axes])
 
   return (
-    // <div id="app" ref={appRef}>
     <>
-      <Slideshow data={slidesData[0]} max={MAX_VALUE} />
+      <Canvas id="canvas" eventSource={document.getElementById("root")}>
+        <Perf position={"top-left"} />
+        <View.Port />
+      </Canvas>
+      <div id="app" ref={appRef}>
+        <Slideshow data={slidesData[0]} max={MAX_VALUE} />
+      </div>
       {!explosionView ? (
         <Progress max={MAX_VALUE} value={currentArticle} />
       ) : null}
-      <Canvas id="canvas" eventSource={document.getElementById("root")}>
-        <View.Port />
-      </Canvas>
     </>
-    // </div>
   )
 }
 

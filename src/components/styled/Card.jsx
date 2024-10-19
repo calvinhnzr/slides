@@ -16,6 +16,10 @@ export const Container = styled.div`
     grid-column: 1 / 13;
     grid-row: 1 / 13;
   }
+  &.side {
+    grid-column: 8 / 13;
+    grid-row: 1 / 13;
+  }
 `
 
 export const Card = styled.div`

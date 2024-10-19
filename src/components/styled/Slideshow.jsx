@@ -20,16 +20,24 @@ const Div = styled.div`
   height: 100%;
   overflow: hidden;
   background-color: ${COLOR_BACKGROUND};
+
+  &::before {
+  }
+
   &.explosion {
     transform-origin: center;
     transform: scale(0.15);
     overflow: visible;
+
     background-color: ${COLOR_BACKGROUND_EXPLOSION};
     &::before {
       content: "";
       position: absolute;
       height: 100%;
       width: 100%;
+      /* background-color: ${COLOR_BACKGROUND}; */
+      z-index: 10;
+      background: none;
       outline: 2rem solid white;
     }
   }

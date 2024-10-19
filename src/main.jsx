@@ -2,13 +2,26 @@ import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
 import { MDXProvider } from "@mdx-js/react"
 import isPropValid from "@emotion/is-prop-valid"
-import { View, Box, CameraControls, OrbitControls } from "@react-three/drei"
+import {
+  View,
+  Box,
+  Sphere,
+  Torus,
+  Stage,
+  CameraControls,
+  OrbitControls,
+  Stars,
+} from "@react-three/drei"
 import { StyleSheetManager, createGlobalStyle } from "styled-components"
 
 import { App } from "./App.jsx"
 
 import "@/styles/reset.css"
 import "@/styles/index.css"
+
+import Tree from "@/components/render/Tree"
+import Stone from "@/components/render/Stone"
+import Target from "@/components/render/Target"
 
 import { Card, Container } from "@/components/styled/Card"
 import { Headline, SubHeadline, Title } from "@/components/styled/Title"
@@ -42,12 +55,22 @@ createRoot(document.getElementById("root")).render(
         View,
         Scene,
         Box,
+        Sphere,
         CameraControls,
         OrbitControls,
+        Torus,
+        Stone,
+        Tree,
+        Stage,
+        Target,
       }}
     >
       <StyleSheetManager shouldForwardProp={shouldForwardProp}>
         <GlobalStyle />
+        <View className="canvas-background">
+          <CameraControls domElement={document.getElementById("root")} />
+          <Stars />
+        </View>
         <App />
       </StyleSheetManager>
     </MDXProvider>
