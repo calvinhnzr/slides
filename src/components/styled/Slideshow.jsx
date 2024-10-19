@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import React, { useEffect, useState, useCallback } from "react"
 import { useAtom } from "jotai"
 import { styled } from "styled-components"
 import classNames from "classnames"
@@ -43,7 +43,7 @@ const Div = styled.div`
   }
 `
 
-// Vertical Srcoll
+// Vertical Scroll
 const Main = styled.main`
   height: 100%;
   width: 100%;
@@ -66,7 +66,7 @@ const Main = styled.main`
   }
 `
 
-// Horizontal Srcoll
+// Horizontal Scroll
 const Article = styled.article`
   width: 100%;
   height: 100%;
@@ -120,31 +120,33 @@ export const Section = styled.section`
   }
 `
 
-export const Slideshow = ({ data, max }) => {
+export const Slideshow = React.memo(({ data, max }) => {
   const [currentArticle, setCurrentArticle] = useAtom(currentArticleAtom)
   const [explosionView] = useAtom(explosionViewAtom)
   const mainClassNames = classNames({
     explosion: explosionView,
   })
 
-  const handleKeyDown = (event) => {
-    switch (event.key) {
-      case "ArrowRight":
-        if (currentArticle < max) {
-          setCurrentArticle(currentArticle + 1)
-        }
-        break
-      case "ArrowLeft":
-        if (currentArticle > 0) {
-          setCurrentArticle(currentArticle - 1)
-        }
-        break
-    }
-  }
+  const handleKeyDown = useCallback(
+    (event) => {
+      switch (event.key) {
+        case "ArrowRight":
+          if (currentArticle < max) {
+            setCurrentArticle((prev) => prev + 1)
+          }
+          break
+        case "ArrowLeft":
+          if (currentArticle > 0) {
+            setCurrentArticle((prev) => prev - 1)
+          }
+          break
+      }
+    },
+    [currentArticle, max, setCurrentArticle]
+  )
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown)
-
     return () => {
       window.removeEventListener("keydown", handleKeyDown)
     }
@@ -177,9 +179,9 @@ export const Slideshow = ({ data, max }) => {
       </Main>
     </Div>
   )
-}
+})
 
-const ArticleWrapper = (props) => {
+const ArticleWrapper = React.memo((props) => {
   const [currentSection, setCurrentSection] = useState(0)
   const [explosionView] = useAtom(explosionViewAtom)
 
@@ -187,20 +189,23 @@ const ArticleWrapper = (props) => {
     explosion: explosionView,
   })
 
-  const handleKeyDown = (event) => {
-    switch (event.key) {
-      case "ArrowDown":
-        if (currentSection < props.max) {
-          setCurrentSection(currentSection + 1)
-        }
-        break
-      case "ArrowUp":
-        if (currentSection > 0) {
-          setCurrentSection(currentSection - 1)
-        }
-        break
-    }
-  }
+  const handleKeyDown = useCallback(
+    (event) => {
+      switch (event.key) {
+        case "ArrowDown":
+          if (currentSection < props.max) {
+            setCurrentSection((prev) => prev + 1)
+          }
+          break
+        case "ArrowUp":
+          if (currentSection > 0) {
+            setCurrentSection((prev) => prev - 1)
+          }
+          break
+      }
+    },
+    [currentSection, props.max]
+  )
 
   useEffect(() => {
     if (props.currentArticle === props.index)
@@ -209,7 +214,7 @@ const ArticleWrapper = (props) => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown)
     }
-  }, [handleKeyDown])
+  }, [handleKeyDown, props.currentArticle, props.index])
 
   return (
     <Article
@@ -220,9 +225,9 @@ const ArticleWrapper = (props) => {
       {props.children}
     </Article>
   )
-}
+})
 
-const SectionWrapper = (props) => {
+const SectionWrapper = React.memo((props) => {
   const [explosionView] = useAtom(explosionViewAtom)
 
   const sectionClassNames = classNames({
@@ -232,4 +237,4 @@ const SectionWrapper = (props) => {
   })
 
   return <Section className={sectionClassNames}>{props.children}</Section>
-}
+})
