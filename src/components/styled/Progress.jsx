@@ -1,8 +1,8 @@
 import styled from "styled-components"
 import { COLOR_ACCENT, COLOR_BACKGROUND_INTRO } from "@/store/base"
 
-const myDarkGrey = COLOR_BACKGROUND_INTRO
-const myBlue = COLOR_ACCENT
+const myDarkGrey = "#445369"
+const myBlue = "#626f82"
 
 export const Progress = styled.progress`
   z-index: 100;

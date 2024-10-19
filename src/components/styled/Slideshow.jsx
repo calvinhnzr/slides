@@ -20,7 +20,8 @@ const Div = styled.div`
   height: 100%;
   overflow: hidden;
   background-color: ${COLOR_BACKGROUND};
-
+  background: #626f82;
+  will-change: transform;
   &::before {
   }
 
@@ -30,6 +31,7 @@ const Div = styled.div`
     overflow: visible;
 
     background-color: ${COLOR_BACKGROUND_EXPLOSION};
+    background: none;
     &::before {
       content: "";
       position: absolute;
@@ -54,12 +56,14 @@ const Main = styled.main`
 
   transition: 0.5s transform linear;
   will-change: transform;
+
   transform: translateX(
     calc(
       ${(props) => props.currentArticle * -100}% -
         ${(props) => props.currentArticle * props.gap}rem
     )
   );
+
   &.explosion {
     gap: 0 ${GAP_EXPLOSION}rem;
     transition: calc(0.5s / 4) transform linear;
@@ -72,9 +76,11 @@ const Article = styled.article`
   height: 100%;
   &:first-child > section {
     background-color: ${COLOR_BACKGROUND_INTRO};
+    background-color: #cd4d4d;
   }
   &:last-child > section {
     background-color: ${COLOR_BACKGROUND_INTRO};
+    background-color: #81ad97;
   }
 
   display: flex;
@@ -103,6 +109,7 @@ export const Section = styled.section`
   width: 100%;
   height: 100%;
   background-color: ${COLOR_BACKGROUND};
+  background-color: #626f82;
 
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -110,6 +117,7 @@ export const Section = styled.section`
   gap: 1rem;
 
   flex: none;
+
   &.explosion {
     outline: 0.4rem solid white;
   }
@@ -129,17 +137,10 @@ export const Slideshow = React.memo(({ data, max }) => {
 
   const handleKeyDown = useCallback(
     (event) => {
-      switch (event.key) {
-        case "ArrowRight":
-          if (currentArticle < max) {
-            setCurrentArticle((prev) => prev + 1)
-          }
-          break
-        case "ArrowLeft":
-          if (currentArticle > 0) {
-            setCurrentArticle((prev) => prev - 1)
-          }
-          break
+      if (event.key === "ArrowRight" && currentArticle < max) {
+        setCurrentArticle((prev) => prev + 1)
+      } else if (event.key === "ArrowLeft" && currentArticle > 0) {
+        setCurrentArticle((prev) => prev - 1)
       }
     },
     [currentArticle, max, setCurrentArticle]
@@ -156,7 +157,7 @@ export const Slideshow = React.memo(({ data, max }) => {
     <Div className={mainClassNames}>
       <Main
         currentArticle={currentArticle}
-        className={mainClassNames}
+        className={explosionView ? "explosion" : ""}
         gap={GAP_EXPLOSION}
       >
         {data.map((article, index) => (
@@ -184,26 +185,21 @@ const ArticleWrapper = React.memo((props) => {
 
   const handleKeyDown = useCallback(
     (event) => {
-      switch (event.key) {
-        case "ArrowDown":
-          if (currentSection < props.max) {
-            setCurrentSection((prev) => prev + 1)
-          }
-          break
-        case "ArrowUp":
-          if (currentSection > 0) {
-            setCurrentSection((prev) => prev - 1)
-          }
-          break
+      if (props.currentArticle === props.index) {
+        if (event.key === "ArrowDown" && currentSection < props.max) {
+          setCurrentSection((prev) => prev + 1)
+        } else if (event.key === "ArrowUp" && currentSection > 0) {
+          setCurrentSection((prev) => prev - 1)
+        }
       }
     },
-    [currentSection, props.max]
+    [currentSection, props.currentArticle, props.index, props.max]
   )
 
   useEffect(() => {
-    if (props.currentArticle === props.index)
+    if (props.currentArticle === props.index) {
       window.addEventListener("keydown", handleKeyDown)
-
+    }
     return () => {
       window.removeEventListener("keydown", handleKeyDown)
     }
@@ -242,8 +238,6 @@ const SectionWrapper = React.memo((props) => {
     [props.el.type || "simple"]: true,
     active: props.currentSection === props.index && props.active,
   })
-
-  useEffect(() => {}, [props.currentArticle])
 
   return <Section className={sectionClassNames}>{props.children}</Section>
 })

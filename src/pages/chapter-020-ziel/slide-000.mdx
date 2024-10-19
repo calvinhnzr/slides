@@ -1,5 +1,14 @@
-export const headline = "Ziel"
+export const headline = "Was ist das Ziel?"
 export const layout = "normal"
-export const type = "simple"
+export const type = "intro"
 
-### {headline}
+# {headline}
+
+<Container className="side">
+  <View className="canvas-view">
+    <CameraControls />
+    <Stage adjustCamera={false}>
+      <Target />
+    </Stage>
+  </View>
+</Container>

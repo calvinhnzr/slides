@@ -67,10 +67,6 @@ createRoot(document.getElementById("root")).render(
     >
       <StyleSheetManager shouldForwardProp={shouldForwardProp}>
         <GlobalStyle />
-        <View className="canvas-background">
-          <CameraControls domElement={document.getElementById("root")} />
-          <Stars />
-        </View>
         <App />
       </StyleSheetManager>
     </MDXProvider>

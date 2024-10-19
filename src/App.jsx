@@ -1,9 +1,17 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useMemo } from "react"
 import { useAtom } from "jotai"
 import classNames from "classnames"
 import { styled } from "styled-components"
-import { Canvas } from "@react-three/fiber"
-import { Box, View, CameraControls, Stars, Stage } from "@react-three/drei"
+import * as THREE from "three"
+import { Canvas, useLoader, useThree, useFrame } from "@react-three/fiber"
+import {
+  Box,
+  View,
+  CameraControls,
+  Stars,
+  Stage,
+  Html,
+} from "@react-three/drei"
 import { Perf } from "r3f-perf"
 
 import {
@@ -23,6 +31,31 @@ import { Progress } from "@/components/styled/Progress"
 
 import { Scene } from "@/components/render/Scene"
 
+function CustomView({ children, ...props }) {
+  const { gl, scene, camera, size } = useThree()
+  const composerRef = useRef()
+  const renderTarget = useMemo(
+    () => new THREE.WebGLRenderTarget(size.width, size.height),
+    [size]
+  )
+  const texture = useLoader(THREE.TextureLoader, "./texture/grain.jpg")
+
+  useFrame(() => {
+    gl.setRenderTarget(renderTarget)
+    gl.render(scene, camera)
+    gl.setRenderTarget(null)
+    composerRef.current.render()
+  })
+
+  return (
+    <>
+      <EffectComposer ref={composerRef} args={[gl, renderTarget]}>
+        <Noise /> {/* Add your desired effects here */}
+      </EffectComposer>
+    </>
+  )
+}
+
 export function App() {
   const [slidesData] = useAtom(slidesAtom)
   const [currentArticle] = useAtom(currentArticleAtom)
@@ -31,8 +64,6 @@ export function App() {
   const MAX_VALUE = slidesData[0].length - 1
   const [isFullscreen, toggleFullscreen] = useFullscreen()
   const { buttons, axes } = useGamepad(true)
-
-  const appRef = useRef()
 
   useKeyDown((event) => {
     switch (event.key) {
@@ -50,6 +81,7 @@ export function App() {
         break
     }
   })
+
   // Gamepad API
   useEffect(() => {
     if (buttons[15] || buttons[1])
@@ -71,11 +103,25 @@ export function App() {
 
   return (
     <>
+      <View className="canvas-background">
+        <CameraControls domElement={document.getElementById("root")} />
+        {/* <CustomView /> */}
+        <Stars
+          radius={120}
+          depth={10}
+          count={5000}
+          factor={12}
+          saturation={20}
+          fade
+          speed={1}
+        />
+        {/* <Html></Html> */}
+      </View>
       <Canvas id="canvas" eventSource={document.getElementById("root")}>
-        <Perf position={"top-left"} />
+        {explosionView ? <Perf position={"top-left"} /> : null}
         <View.Port />
       </Canvas>
-      <div id="app" ref={appRef}>
+      <div id="app">
         <Slideshow data={slidesData[0]} max={MAX_VALUE} />
       </div>
       {!explosionView ? (

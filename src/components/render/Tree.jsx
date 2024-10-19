@@ -11,7 +11,7 @@ export default function Tree(props) {
     "https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/tree-beech/model.gltf"
   )
   return (
-    <group ref={group} {...props} dispose={null} scale={0.1}>
+    <group ref={group} {...props} dispose={null} scale={0.4}>
       <mesh
         geometry={nodes["tree-beech"].geometry}
         material={materials.color_main}

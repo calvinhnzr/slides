@@ -13,13 +13,18 @@ export const Container = styled.div`
   position: relative;
 
   &.full {
-    outline: 1px solid red;
+    border-radius: 1rem;
+
     grid-column: 1 / 13;
     grid-row: 1 / 13;
   }
+
   &.side {
-    grid-column: 8 / 13;
-    grid-row: 1 / 13;
+    /* border: 5px solid #ffca81; */
+    /* background-color: ${COLOR_BACKGROUND_EXPLOSION}; */
+    background: #4c5869;
+    grid-column: 8 / 12;
+    grid-row: 3 / 11;
   }
 `
 

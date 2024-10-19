@@ -10,8 +10,9 @@ export default function Target(props) {
   const { nodes, materials } = useGLTF(
     "https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/target-stand/model.gltf"
   )
+
   return (
-    <group ref={group} {...props} dispose={null} alphaHash>
+    <group ref={group} {...props} dispose={null}>
       <group rotation={[Math.PI / 2, 0, 0]}>
         <mesh
           geometry={nodes.Cylinder016.geometry}
