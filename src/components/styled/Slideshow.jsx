@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, memo } from "react"
+import React, { useEffect, useState, useCallback } from "react"
 import { useAtom } from "jotai"
 import { styled } from "styled-components"
 import classNames from "classnames"
@@ -120,10 +120,9 @@ export const Section = styled.section`
   }
 `
 
-export const Slideshow = memo(({ data, max }) => {
+export const Slideshow = React.memo(({ data, max }) => {
   const [currentArticle, setCurrentArticle] = useAtom(currentArticleAtom)
   const [explosionView] = useAtom(explosionViewAtom)
-  const [currentSection, setCurrentSection] = useState(0)
   const mainClassNames = classNames({
     explosion: explosionView,
   })
@@ -141,19 +140,9 @@ export const Slideshow = memo(({ data, max }) => {
             setCurrentArticle((prev) => prev - 1)
           }
           break
-        case "ArrowDown":
-          if (currentSection < data[currentArticle].length - 1) {
-            setCurrentSection((prev) => prev + 1)
-          }
-          break
-        case "ArrowUp":
-          if (currentSection > 0) {
-            setCurrentSection((prev) => prev - 1)
-          }
-          break
       }
     },
-    [currentArticle, currentSection, data, max, setCurrentArticle]
+    [currentArticle, max, setCurrentArticle]
   )
 
   useEffect(() => {
@@ -170,46 +159,91 @@ export const Slideshow = memo(({ data, max }) => {
         className={mainClassNames}
         gap={GAP_EXPLOSION}
       >
-        {data.map((article, articleIndex) => (
-          <Article
-            key={articleIndex}
-            currentSection={currentSection}
-            className={mainClassNames}
-            gap={GAP_EXPLOSION}
-          >
-            {article.map((section, sectionIndex) => {
-              const el = section[0]
-              return (
-                <SectionWrapper
-                  key={sectionIndex}
-                  el={el}
-                  currentSection={currentSection}
-                  currentArticle={currentArticle}
-                  articleIndex={articleIndex}
-                  sectionIndex={sectionIndex}
-                >
-                  {<el.default />}
-                </SectionWrapper>
-              )
-            })}
-          </Article>
+        {data.map((article, index) => (
+          <ArticleWrapper
+            key={index}
+            index={index}
+            max={article.length - 1}
+            currentArticle={currentArticle}
+            article={article}
+          />
         ))}
       </Main>
     </Div>
   )
 })
 
-const SectionWrapper = memo((props) => {
+const ArticleWrapper = React.memo((props) => {
+  const [currentSection, setCurrentSection] = useState(0)
+  const [explosionView] = useAtom(explosionViewAtom)
+
+  const articleClassNames = classNames({
+    explosion: explosionView,
+    active: props.currentArticle === props.index,
+  })
+
+  const handleKeyDown = useCallback(
+    (event) => {
+      switch (event.key) {
+        case "ArrowDown":
+          if (currentSection < props.max) {
+            setCurrentSection((prev) => prev + 1)
+          }
+          break
+        case "ArrowUp":
+          if (currentSection > 0) {
+            setCurrentSection((prev) => prev - 1)
+          }
+          break
+      }
+    },
+    [currentSection, props.max]
+  )
+
+  useEffect(() => {
+    if (props.currentArticle === props.index)
+      window.addEventListener("keydown", handleKeyDown)
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [handleKeyDown, props.currentArticle, props.index])
+
+  return (
+    <Article
+      currentSection={currentSection}
+      className={articleClassNames}
+      gap={GAP_EXPLOSION}
+    >
+      {props.article.map((section, index) => {
+        const el = section[0]
+        return (
+          <SectionWrapper
+            key={index}
+            index={index}
+            currentSection={currentSection}
+            active={props.currentArticle === props.index}
+            el={el}
+          >
+            {<el.default />}
+          </SectionWrapper>
+        )
+      })}
+      {props.children}
+    </Article>
+  )
+})
+
+const SectionWrapper = React.memo((props) => {
   const [explosionView] = useAtom(explosionViewAtom)
 
   const sectionClassNames = classNames({
     explosion: explosionView,
     [props.el.type || "simple"]: true,
-    currentSlide: props.isCurrentSlide,
-    active:
-      props.currentSection === props.sectionIndex &&
-      props.currentArticle === props.articleIndex,
+    active: props.currentSection === props.index && props.active,
   })
+
+  useEffect(() => {}, [props.currentArticle])
 
   return <Section className={sectionClassNames}>{props.children}</Section>
 })
