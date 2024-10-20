@@ -1,15 +1,9 @@
 import React, { useEffect, useState, useCallback } from "react"
 import { useAtom } from "jotai"
 import { styled } from "styled-components"
-import classNames from "classnames"
-import {
-  COLOR_BACKGROUND_EXPLOSION,
-  COLOR_BACKGROUND,
-  COLOR_BACKGROUND_INTRO,
-} from "@/store/base"
-import { currentArticleAtom, explosionViewAtom } from "@/store/atoms"
+import { COLOR_SECTION } from "@/store/base"
+import { explosionViewAtom } from "@/store/atoms"
 import "@/styles/Slide.css"
-import { GAP_EXPLOSION } from "../../store/base"
 
 import { MainWrapper } from "./Main"
 import { ArticleWrapper } from "./Article"
@@ -23,16 +17,14 @@ const Div = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: ${COLOR_BACKGROUND};
-  background: #626f82;
+
+  background: ${COLOR_SECTION};
   will-change: transform;
 
   &.explosion {
     transform-origin: center;
     transform: scale(0.15);
     overflow: visible;
-
-    background-color: ${COLOR_BACKGROUND_EXPLOSION};
     background: none;
     &::before {
       content: "";

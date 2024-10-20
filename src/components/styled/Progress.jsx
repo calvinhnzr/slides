@@ -1,8 +1,5 @@
 import styled from "styled-components"
-import { COLOR_ACCENT, COLOR_BACKGROUND_INTRO } from "@/store/base"
-
-const myDarkGrey = "#445369"
-const myBlue = "#626f82"
+import { COLOR_SECTION, COLOR_EXPLOSION } from "@/store/base"
 
 export const Progress = styled.progress`
   z-index: 100;
@@ -19,15 +16,15 @@ export const Progress = styled.progress`
     -moz-appearance: none;
     appearance: none;
     border: none;
-    color: ${myDarkGrey};
+    color: ${COLOR_EXPLOSION};
 
-    background-color: ${myBlue};
+    background-color: ${COLOR_SECTION};
   }
   &[value]::-webkit-progress-value {
-    background-color: ${myDarkGrey};
+    background-color: ${COLOR_EXPLOSION};
     transition: width 0.5s ease-in-out;
   }
   &[value]::-webkit-progress-bar {
-    background-color: ${myBlue};
+    background-color: ${COLOR_SECTION};
   }
 `

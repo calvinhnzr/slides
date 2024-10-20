@@ -1,13 +1,7 @@
-import React, { useEffect, useState, useCallback } from "react"
+import React, { useState } from "react"
 import { useAtom } from "jotai"
 import { styled } from "styled-components"
-import classNames from "classnames"
-import {
-  COLOR_BACKGROUND_EXPLOSION,
-  COLOR_BACKGROUND,
-  COLOR_BACKGROUND_INTRO,
-} from "@/store/base"
-import { currentArticleAtom, explosionViewAtom } from "@/store/atoms"
+import { explosionViewAtom } from "@/store/atoms"
 import "@/styles/Slide.css"
 import { GAP_EXPLOSION } from "@/store/base"
 import useKeydown from "@/hooks/useKeydown"
@@ -42,8 +36,6 @@ export const MainWrapper = (props) => {
   const [explosionView] = useAtom(explosionViewAtom)
 
   useKeydown((event) => {
-    console.log(props.max)
-    console.log(currentArticle)
     switch (event.key) {
       case "ArrowRight":
         if (currentArticle < props.max) setCurrentArticle((prev) => prev + 1)

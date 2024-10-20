@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useAtom } from "jotai"
 import { styled } from "styled-components"
 import classNames from "classnames"
-import {
-  COLOR_BACKGROUND_EXPLOSION,
-  COLOR_BACKGROUND,
-  COLOR_BACKGROUND_INTRO,
-} from "@/store/base"
+import { COLOR_OUTRO, COLOR_INTRO } from "@/store/base"
 import { explosionViewAtom } from "@/store/atoms"
 import "@/styles/Slide.css"
 import { GAP_EXPLOSION } from "@/store/base"
@@ -17,12 +13,10 @@ export const Article = styled.article`
   width: 100%;
   height: 100%;
   &:first-child > section {
-    background-color: ${COLOR_BACKGROUND_INTRO};
-    background-color: #cd4d4d;
+    background-color: ${COLOR_INTRO};
   }
   &:last-child > section {
-    background-color: ${COLOR_BACKGROUND_INTRO};
-    background-color: #81ad97;
+    background-color: ${COLOR_OUTRO};
   }
 
   display: flex;
@@ -57,8 +51,6 @@ export const ArticleWrapper = (props) => {
   })
 
   useKeydown((event) => {
-    console.log(props.max)
-    console.log(currentSection)
     if (props.currentArticle === props.index) {
       switch (event.key) {
         case "ArrowDown":
@@ -80,7 +72,6 @@ export const ArticleWrapper = (props) => {
       {React.Children.map(props.children, (child) =>
         React.cloneElement(child, {
           currentSection,
-          // currentArticle: props.currentArticle,
           active: props.currentArticle === props.index,
         })
       )}

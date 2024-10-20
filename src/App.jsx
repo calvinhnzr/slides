@@ -20,8 +20,6 @@ import {
   explosionViewAtom,
 } from "@/store/atoms"
 
-import { COLOR_BACKGROUND, COLOR_BACKGROUND_EXPLOSION } from "@/store/base"
-
 import useGamepad from "@/hooks/useGamepad"
 import useKeyDown from "@/hooks/useKeydown"
 import useFullscreen from "@/hooks/useFullScreen"
@@ -77,9 +75,6 @@ export function App() {
 
   return (
     <>
-      {/* <View className="canvas-background">
-        <CameraControls domElement={document.getElementById("root")} />
-      </View> */}
       <div id="app">
         <Slideshow data={slidesData} max={MAX_VALUE} />
       </div>

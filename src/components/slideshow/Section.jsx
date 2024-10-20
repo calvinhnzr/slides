@@ -2,19 +2,14 @@ import React, { useEffect, useState, useCallback } from "react"
 import { useAtom } from "jotai"
 import { styled } from "styled-components"
 import classNames from "classnames"
-import {
-  COLOR_BACKGROUND_EXPLOSION,
-  COLOR_BACKGROUND,
-  COLOR_BACKGROUND_INTRO,
-} from "@/store/base"
+import { COLOR_SECTION } from "@/store/base"
 import { currentArticleAtom, explosionViewAtom } from "@/store/atoms"
 import "@/styles/Slide.css"
 
 export const Section = styled.section`
   width: 100%;
   height: 100%;
-  background-color: ${COLOR_BACKGROUND};
-  background-color: #626f82;
+  background-color: ${COLOR_SECTION};
 
   display: grid;
   grid-template-columns: repeat(12, 1fr);
