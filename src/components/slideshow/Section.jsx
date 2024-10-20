@@ -21,11 +21,6 @@ export const Section = styled.section`
   &.explosion {
     outline: 0.4rem solid white;
   }
-
-  > * {
-    height: 100%;
-    width: 100%;
-  }
 `
 
 export const SectionWrapper = React.memo((props) => {

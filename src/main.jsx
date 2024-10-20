@@ -24,7 +24,12 @@ import Stone from "@/components/render/Stone"
 import Target from "@/components/render/Target"
 
 import { Card, Container } from "@/components/styled/Card"
-import { Headline, SubHeadline, Title } from "@/components/styled/Title"
+import {
+  Headline,
+  SubHeadline,
+  Title,
+  SubTitle,
+} from "@/components/styled/Title"
 import { Scene } from "@/components/render/Scene"
 
 const GlobalStyle = createGlobalStyle`
@@ -44,31 +49,32 @@ function shouldForwardProp(propName, target) {
 }
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <MDXProvider
-      components={{
-        h1: Headline,
-        h2: SubHeadline,
-        h3: Title,
-        Card,
-        Container,
-        View,
-        Scene,
-        Box,
-        Sphere,
-        CameraControls,
-        OrbitControls,
-        Torus,
-        Stone,
-        Tree,
-        Stage,
-        Target,
-      }}
-    >
-      <StyleSheetManager shouldForwardProp={shouldForwardProp}>
-        <GlobalStyle />
-        <App />
-      </StyleSheetManager>
-    </MDXProvider>
-  </StrictMode>
+  // <StrictMode>
+  <MDXProvider
+    components={{
+      h1: Title,
+      h2: SubTitle,
+      h3: Headline,
+      h4: SubHeadline,
+      Card,
+      Container,
+      View,
+      Scene,
+      Box,
+      Sphere,
+      CameraControls,
+      OrbitControls,
+      Torus,
+      Stone,
+      Tree,
+      Stage,
+      Target,
+    }}
+  >
+    <StyleSheetManager shouldForwardProp={shouldForwardProp}>
+      <GlobalStyle />
+      <App />
+    </StyleSheetManager>
+  </MDXProvider>
+  // </StrictMode>
 )

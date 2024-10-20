@@ -13,7 +13,7 @@ export default function Target(props) {
 
   return (
     <group ref={group} {...props} dispose={null}>
-      <group rotation={[Math.PI / 2, 0, 0]}>
+      <group rotation={[Math.PI / 2, 0, 0.3]} scale={1.5}>
         <mesh
           geometry={nodes.Cylinder016.geometry}
           material={materials["Red.025"]}
