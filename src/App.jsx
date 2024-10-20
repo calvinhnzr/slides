@@ -1,49 +1,19 @@
 import { useEffect } from "react"
 import { useAtom } from "jotai"
-import classNames from "classnames"
-import { styled } from "styled-components"
-import "@/styles/Slide.css"
-import {
-  slidesAtom,
-  currentArticleAtom,
-  explosionViewAtom,
-} from "@/store/atoms"
+import { Canvas } from "@react-three/fiber"
+import { View, Stars } from "@react-three/drei"
+import { Perf } from "r3f-perf"
+
+import { slidesAtom, explosionViewAtom } from "@/store/atoms"
 
 import useGamepad from "@/hooks/useGamepad"
 import useKeyDown from "@/hooks/useKeydown"
 import useFullscreen from "@/hooks/useFullScreen"
 
-import { Slideshow } from "@/components/styled/Slideshow"
-import { Progress } from "@/components/styled/Progress"
-
-const Div = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-
-  background-color: #2e3034;
-  &.explosion {
-    transform-origin: center;
-    transform: scale(0.15);
-    overflow: visible;
-    position: relative;
-    &::before {
-      content: "";
-      position: absolute;
-      height: 100%;
-      width: 100%;
-      outline: 2rem solid white;
-      z-index: 10;
-    }
-  }
-`
+import { Slideshow } from "./components/slideshow/index"
 
 export function App() {
   const [slidesData] = useAtom(slidesAtom)
-  const [currentArticle] = useAtom(currentArticleAtom)
   const [explosionView, setExplosionView] = useAtom(explosionViewAtom)
 
   const MAX_VALUE = slidesData[0].length - 1
@@ -66,6 +36,7 @@ export function App() {
         break
     }
   })
+
   // Gamepad API
   useEffect(() => {
     if (buttons[15] || buttons[1])
@@ -85,17 +56,32 @@ export function App() {
     if (buttons[4] || buttons[5]) setExplosionView(!explosionView)
   }, [buttons, axes])
 
-  const appClassNames = classNames({
-    explosion: explosionView,
-  })
-
   return (
-    <Div id="app" className={appClassNames}>
-      <Slideshow data={slidesData[0]} max={MAX_VALUE} />
-      {!explosionView ? (
-        <Progress max={MAX_VALUE} value={currentArticle} />
-      ) : null}
-    </Div>
+    <>
+      <Canvas
+        className="canvas canvas-view"
+        eventSource={document.getElementById("root")}
+      >
+        {explosionView ? <Perf position={"top-left"} /> : null}
+        <View.Port />
+      </Canvas>
+
+      <div id="app">
+        <Slideshow data={slidesData} max={MAX_VALUE} />
+      </div>
+
+      <Canvas className="canvas canvas-background">
+        <Stars
+          radius={120}
+          depth={10}
+          count={5000}
+          factor={12}
+          saturation={20}
+          fade
+          speed={1}
+        />
+      </Canvas>
+    </>
   )
 }
 

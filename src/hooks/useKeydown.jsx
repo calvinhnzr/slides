@@ -1,17 +1,20 @@
-import { useEffect } from "react"
+import { useEffect, useCallback } from "react"
 
-function useKeyDown(callback) {
-  useEffect(() => {
-    const handleKeyDown = (event) => {
+function useKeydown(callback) {
+  const handleKeyDown = useCallback(
+    (event) => {
       callback(event)
-    }
+    },
+    [callback]
+  )
 
+  useEffect(() => {
     window.addEventListener("keydown", handleKeyDown)
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown)
     }
-  }, [callback])
+  }, [handleKeyDown])
 }
 
-export default useKeyDown
+export default useKeydown

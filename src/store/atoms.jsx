@@ -41,6 +41,4 @@ export const slidesAtom = atom(async (get) => {
   return nestedArray
 })
 
-export const currentArticleAtom = atom(0)
-
 export const explosionViewAtom = atom(true)

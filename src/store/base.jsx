@@ -1,25 +1,33 @@
-// COLOR
-const TH_COLOR_RED = "#CF1820"
-const TH_COLOR_ORANGE = "#EC6525"
-const TH_COLOR_PURPLE = "#AF368C"
+// TH Köln Color Palette
+const th_color_red = "#CF1820"
+const th_color_orange = "#EC6525"
+const th_color_purple = "#AF368C"
 
-const JOYCON_COLOR_PURPLE = "#F0CBEB"
-const JOYCON_COLOR_PURPLE_DARK = "#373037"
-const JOYCON_COLOR_GREEN = "#BCFFC8"
-const JOYCON_COLOR_GREEN_DARK = "#2D322D"
+// Nintendo Switch JoyCon Pastel Color Palette
+const njc_color_purple = "#F0CBEB"
+const njc_color_purple_dark = "#373037"
+const njc_color_green = "#BCFFC8"
+const njc_color_green_dark = "#2D322D"
 
-const COLOR_GREEN = "#65d677"
-const COLOR_BLUE = "cornflowerblue"
-const COLOR_ORANGE = "coral"
+// Mandelbrot Set Color Pallete
+const mbs_color_gray_dark = "#2e3034"
+const mbs_color_gray_darker = "#202123"
+const mbs_color_gray_darkst = "#191a1b"
 
-const COLOR_GRAY_DARK = "#2e3034"
-const COLOR_GRAY_DARKER = "#202123"
-const COLOR_GRAY_DARKEST = "#191a1b"
+// Amazing Bomberman Color Palette
+const bm_color_yellow = "#dfc5a4"
+const bm_color_blue_night = "#2b3756"
+const bm_color_gray_dark = "#4c5869"
+const bm_color_gray = "#626f82"
+const bm_color_red = "#cd4d4d"
+const bm_color_green = "#81ad97"
 
-export const COLOR_BACKGROUND_EXPLOSION = COLOR_GRAY_DARKER
-export const COLOR_BACKGROUND = COLOR_GRAY_DARK
-export const COLOR_BACKGROUND_INTRO = COLOR_GRAY_DARKEST
-export const COLOR_ACCENT = JOYCON_COLOR_GREEN
+// EXPORTS
+export const COLOR_EXPLOSION = bm_color_blue_night
+export const COLOR_CARD = bm_color_gray_dark
+export const COLOR_SECTION = bm_color_gray
+export const COLOR_INTRO = bm_color_red
+export const COLOR_OUTRO = bm_color_green
 
 // SPACING
 export const GAP_EXPLOSION = 10 //rem
