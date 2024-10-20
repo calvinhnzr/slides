@@ -18,9 +18,7 @@ const Div = styled.div`
   height: 100%;
   overflow: hidden;
 
-  background: ${COLOR_SECTION};
-
-  border: 10px solid red;
+  background: ${COLOR_CARD};
 
   will-change: transform;
 

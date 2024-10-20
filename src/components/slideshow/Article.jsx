@@ -28,7 +28,6 @@ export const Article = styled.article`
   gap: ${GAP_EXPLOSION}rem;
 
   background-color: ${COLOR_SECTION};
-  background-color: blue;
 
   transition: 0.3s transform linear;
   will-change: transform;
@@ -43,6 +42,23 @@ export const Article = styled.article`
     background: none;
     transition: calc(0.5s / 4) transform linear;
     display: flex;
+    &::before {
+      display: none;
+    }
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    /* height: ${(props) => props.max * 100}%; // article length * gap */
+    height: calc(
+      ${(props) => props.max * 100}% +
+        ${(props) => props.gap * (props.max - 1)}rem
+    );
+
+    width: 100%;
+    background-color: ${COLOR_SECTION};
+    z-index: -1;
   }
 `
 
@@ -73,6 +89,7 @@ export const ArticleWrapper = React.memo((props) => {
       currentSection={currentSection}
       className={articleClassNames}
       gap={GAP_EXPLOSION}
+      max={props.max + 1}
     >
       {React.Children.map(props.children, (child) =>
         React.cloneElement(child, {
