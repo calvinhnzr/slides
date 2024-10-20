@@ -1,6 +1,6 @@
 import { useEffect, useCallback } from "react"
 
-function useKeyDown(callback) {
+function useKeydown(callback) {
   const handleKeyDown = useCallback(
     (event) => {
       callback(event)
@@ -17,4 +17,4 @@ function useKeyDown(callback) {
   }, [handleKeyDown])
 }
 
-export default useKeyDown
+export default useKeydown

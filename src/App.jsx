@@ -26,39 +26,13 @@ import useGamepad from "@/hooks/useGamepad"
 import useKeyDown from "@/hooks/useKeydown"
 import useFullscreen from "@/hooks/useFullScreen"
 
-import { Slideshow } from "@/components/styled/Slideshow"
+// import { Slideshow } from "@/components/styled/Slideshow"
+import { Slideshow } from "./components/slideshow/index"
 import { Progress } from "@/components/styled/Progress"
-
-import { Scene } from "@/components/render/Scene"
-
-function CustomView({ children, ...props }) {
-  const { gl, scene, camera, size } = useThree()
-  const composerRef = useRef()
-  const renderTarget = useMemo(
-    () => new THREE.WebGLRenderTarget(size.width, size.height),
-    [size]
-  )
-  const texture = useLoader(THREE.TextureLoader, "./texture/grain.jpg")
-
-  useFrame(() => {
-    gl.setRenderTarget(renderTarget)
-    gl.render(scene, camera)
-    gl.setRenderTarget(null)
-    composerRef.current.render()
-  })
-
-  return (
-    <>
-      <EffectComposer ref={composerRef} args={[gl, renderTarget]}>
-        <Noise /> {/* Add your desired effects here */}
-      </EffectComposer>
-    </>
-  )
-}
 
 export function App() {
   const [slidesData] = useAtom(slidesAtom)
-  const [currentArticle] = useAtom(currentArticleAtom)
+  // const [currentArticle] = useAtom(currentArticleAtom)
   const [explosionView, setExplosionView] = useAtom(explosionViewAtom)
 
   const MAX_VALUE = slidesData[0].length - 1
@@ -107,7 +81,7 @@ export function App() {
         <CameraControls domElement={document.getElementById("root")} />
       </View> */}
       <div id="app">
-        <Slideshow data={slidesData[0]} max={MAX_VALUE} />
+        <Slideshow data={slidesData} max={MAX_VALUE} />
       </div>
 
       <Canvas
@@ -118,9 +92,9 @@ export function App() {
         <View.Port />
       </Canvas>
 
-      {!explosionView ? (
+      {/* {!explosionView ? (
         <Progress max={MAX_VALUE} value={currentArticle} />
-      ) : null}
+      ) : null} */}
 
       <Canvas
         className="canvas canvas-background"
