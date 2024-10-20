@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { useAtom } from "jotai"
 import { styled } from "styled-components"
 import classNames from "classnames"
-import { COLOR_OUTRO, COLOR_INTRO } from "@/store/base"
+import { COLOR_OUTRO, COLOR_INTRO, COLOR_SECTION } from "@/store/base"
 import { explosionViewAtom } from "@/store/atoms"
 import "@/styles/Slide.css"
 import { GAP_EXPLOSION } from "@/store/base"
@@ -12,6 +12,7 @@ import useKeydown from "@/hooks/useKeydown"
 export const Article = styled.article`
   width: 100%;
   height: 100%;
+
   &:first-child > section {
     background-color: ${COLOR_INTRO};
   }
@@ -26,7 +27,10 @@ export const Article = styled.article`
   flex-direction: column;
   gap: ${GAP_EXPLOSION}rem;
 
-  transition: 0.5s transform linear;
+  background-color: ${COLOR_SECTION};
+  background-color: blue;
+
+  transition: 0.3s transform linear;
   will-change: transform;
   transform: translateY(
     calc(
@@ -36,6 +40,7 @@ export const Article = styled.article`
   );
 
   &.explosion {
+    background: none;
     transition: calc(0.5s / 4) transform linear;
     display: flex;
   }

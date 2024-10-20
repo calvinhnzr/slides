@@ -2,7 +2,7 @@ import React from "react"
 import { useAtom } from "jotai"
 import { styled } from "styled-components"
 import classNames from "classnames"
-import { COLOR_SECTION } from "@/store/base"
+import { COLOR_SECTION, COLOR_CARD } from "@/store/base"
 import { explosionViewAtom } from "@/store/atoms"
 import "@/styles/Slide.css"
 
@@ -20,6 +20,10 @@ export const Section = styled.section`
 
   &.explosion {
     outline: 0.4rem solid white;
+  }
+
+  &:first-of-type {
+    background-color: ${COLOR_CARD};
   }
 `
 

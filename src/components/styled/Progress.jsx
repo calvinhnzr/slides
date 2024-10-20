@@ -22,7 +22,7 @@ export const Progress = styled.progress`
   }
   &[value]::-webkit-progress-value {
     background-color: ${COLOR_EXPLOSION};
-    transition: width 0.5s ease-in-out;
+    transition: width 0.3s ease-in-out;
   }
   &[value]::-webkit-progress-bar {
     background-color: ${COLOR_SECTION};

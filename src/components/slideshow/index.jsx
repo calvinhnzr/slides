@@ -1,7 +1,7 @@
 import React from "react"
 import { useAtom } from "jotai"
 import { styled } from "styled-components"
-import { COLOR_SECTION } from "@/store/base"
+import { COLOR_SECTION, COLOR_CARD } from "@/store/base"
 import { explosionViewAtom } from "@/store/atoms"
 import "@/styles/Slide.css"
 
@@ -19,6 +19,9 @@ const Div = styled.div`
   overflow: hidden;
 
   background: ${COLOR_SECTION};
+
+  border: 10px solid red;
+
   will-change: transform;
 
   &.explosion {

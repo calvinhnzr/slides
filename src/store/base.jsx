@@ -15,12 +15,15 @@ const mbs_color_gray_darker = "#202123"
 const mbs_color_gray_darkst = "#191a1b"
 
 // Amazing Bomberman Color Palette
-const bm_color_yellow = "#dfc5a4"
+
+const bm_color_yellow = "#ffca81"
+const bm_color_yellow_light = "#dfc5a4"
 const bm_color_blue_night = "#2b3756"
 const bm_color_gray_dark = "#4c5869"
 const bm_color_gray = "#626f82"
 const bm_color_red = "#cd4d4d"
 const bm_color_green = "#81ad97"
+const bm_color_green_light = "#a8c6ba"
 
 // EXPORTS
 export const COLOR_EXPLOSION = bm_color_blue_night

@@ -19,7 +19,7 @@ export const Container = styled.div`
   }
 
   &.side {
-    background-color: ${COLOR_CARD};
+    /* background-color: ${COLOR_CARD}; */
     border-radius: 1rem;
     grid-column: 8 / 12;
     grid-row: 3 / 11;

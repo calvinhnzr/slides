@@ -37,11 +37,15 @@ h4 {
   em {
     font-style: italic;
     position: relative;
+    /* text-shadow: #5c5346bb 3px 6px 50px; */
+    /* text-shadow: #ffb44cb0 3px 6px 35px; */
     &::after {
       position: absolute;
       display: block;
       content: "";
+
       background-color: #81ad97;
+
       width: 105%;
       height: 2.3rem;
       bottom: -0.2rem;
@@ -60,18 +64,114 @@ h4 {
     grid-row: 2 /3;
     align-self: end;
   }
-  ul,
+  ul {
+    /* outline: 1px solid red; */
+    grid-column: 2 / 12;
+    grid-row: 4 / 12;
+    list-style: inherit;
+
+    /* margin-top: 2rem; */
+
+    li {
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      line-height: 1.2;
+      width: fit-content;
+      padding-left: 2rem;
+      position: relative;
+      z-index: 1;
+      &::marker {
+        content: "-";
+        content: "_";
+        content: "*";
+        content: "...";
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        display: block;
+
+        background-color: #4c5869;
+        /* background-color: #a8c6ba; */
+
+        width: 100%;
+        height: 3.1rem;
+
+        bottom: -0.3rem;
+        left: 1.2rem;
+      }
+    }
+  }
+
   ol {
     /* outline: 1px solid red; */
     grid-column: 2 / 12;
-    grid-row: 3 / 12;
-    list-style: inherit;
-    margin-top: 2rem;
+    grid-row: 4 / 12;
+    list-style: decimal;
+    /* margin-top: 2rem; */
+
     li {
-      margin-bottom: 1.2rem;
-      font-weight: 300;
-      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      font-size: 2rem;
       line-height: 1.2;
+      width: fit-content;
+      padding-left: 2rem;
+      position: relative;
+      z-index: 1;
+
+      /* &::marker {
+        content: "-";
+        content: "_";
+        content: "*";
+        content: "...";
+      } */
+
+      &::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        display: block;
+
+        background-color: #4c5869;
+        /* background-color: #a8c6ba; */
+
+        width: 100%;
+        height: 3.1rem;
+
+        bottom: -0.3rem;
+        left: 1.2rem;
+      }
+    }
+  }
+}
+
+ul,
+ol {
+  li:has(> span) {
+    span {
+      &.meaning {
+        /* color: red; */
+        position: absolute;
+        width: max-content;
+        font-weight: 300;
+        opacity: 0.7;
+        text-align: center;
+        transition: 0.2s linear;
+
+        &::before {
+          margin-left: 2rem;
+
+          /* content: "➡️ "; */
+          content: "👉 ";
+          font-weight: bold;
+        }
+        &:hover {
+          cursor: pointer;
+          opacity: 1;
+        }
+      }
     }
   }
 }

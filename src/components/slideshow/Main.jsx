@@ -16,7 +16,7 @@ export const Main = styled.main`
   flex-direction: row;
   gap: 0 10rem;
 
-  transition: 0.5s transform linear;
+  transition: 0.3s transform linear;
   will-change: transform;
 
   transform: translateX(
@@ -27,7 +27,7 @@ export const Main = styled.main`
   );
 
   &.explosion {
-    gap: 0 ${GAP_EXPLOSION}rem;
+    /* gap: 0 ${GAP_EXPLOSION}rem; */
     transition: calc(0.5s / 4) transform linear;
   }
 `
