@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useCallback } from "react"
+import React from "react"
 import { useAtom } from "jotai"
 import { styled } from "styled-components"
 import classNames from "classnames"
 import { COLOR_SECTION } from "@/store/base"
-import { currentArticleAtom, explosionViewAtom } from "@/store/atoms"
+import { explosionViewAtom } from "@/store/atoms"
 import "@/styles/Slide.css"
 
 export const Section = styled.section`

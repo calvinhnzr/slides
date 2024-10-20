@@ -5,6 +5,7 @@ import { explosionViewAtom } from "@/store/atoms"
 import "@/styles/Slide.css"
 import { GAP_EXPLOSION } from "@/store/base"
 import useKeydown from "@/hooks/useKeydown"
+import { Progress } from "@/components/styled/Progress"
 
 // Vertical Scroll
 export const Main = styled.main`
@@ -31,8 +32,9 @@ export const Main = styled.main`
   }
 `
 
-export const MainWrapper = (props) => {
+export const MainWrapper = React.memo((props) => {
   const [currentArticle, setCurrentArticle] = useState(0)
+  // const [currentArticle, setCurrentArticle] = useAtom(currentArticleAtom)
   const [explosionView] = useAtom(explosionViewAtom)
 
   useKeydown((event) => {
@@ -47,14 +49,19 @@ export const MainWrapper = (props) => {
   })
 
   return (
-    <Main
-      currentArticle={currentArticle}
-      gap={GAP_EXPLOSION}
-      className={explosionView ? "explosion" : ""}
-    >
-      {React.Children.map(props.children, (child) =>
-        React.cloneElement(child, { currentArticle })
-      )}
-    </Main>
+    <>
+      {!explosionView ? (
+        <Progress max={props.max} value={currentArticle} />
+      ) : null}
+      <Main
+        currentArticle={currentArticle}
+        gap={GAP_EXPLOSION}
+        className={explosionView ? "explosion" : ""}
+      >
+        {React.Children.map(props.children, (child) =>
+          React.cloneElement(child, { currentArticle })
+        )}
+      </Main>
+    </>
   )
-}
+})

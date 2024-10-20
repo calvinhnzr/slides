@@ -1,36 +1,19 @@
-import { useEffect, useRef, useMemo } from "react"
+import { useEffect } from "react"
 import { useAtom } from "jotai"
-import classNames from "classnames"
-import { styled } from "styled-components"
-import * as THREE from "three"
-import { Canvas, useLoader, useThree, useFrame } from "@react-three/fiber"
-import {
-  Box,
-  View,
-  CameraControls,
-  Stars,
-  Stage,
-  Html,
-} from "@react-three/drei"
+import { Canvas } from "@react-three/fiber"
+import { View, Stars } from "@react-three/drei"
 import { Perf } from "r3f-perf"
 
-import {
-  slidesAtom,
-  currentArticleAtom,
-  explosionViewAtom,
-} from "@/store/atoms"
+import { slidesAtom, explosionViewAtom } from "@/store/atoms"
 
 import useGamepad from "@/hooks/useGamepad"
 import useKeyDown from "@/hooks/useKeydown"
 import useFullscreen from "@/hooks/useFullScreen"
 
-// import { Slideshow } from "@/components/styled/Slideshow"
 import { Slideshow } from "./components/slideshow/index"
-import { Progress } from "@/components/styled/Progress"
 
 export function App() {
   const [slidesData] = useAtom(slidesAtom)
-  // const [currentArticle] = useAtom(currentArticleAtom)
   const [explosionView, setExplosionView] = useAtom(explosionViewAtom)
 
   const MAX_VALUE = slidesData[0].length - 1
@@ -75,10 +58,6 @@ export function App() {
 
   return (
     <>
-      <div id="app">
-        <Slideshow data={slidesData} max={MAX_VALUE} />
-      </div>
-
       <Canvas
         className="canvas canvas-view"
         eventSource={document.getElementById("root")}
@@ -87,15 +66,11 @@ export function App() {
         <View.Port />
       </Canvas>
 
-      {/* {!explosionView ? (
-        <Progress max={MAX_VALUE} value={currentArticle} />
-      ) : null} */}
+      <div id="app">
+        <Slideshow data={slidesData} max={MAX_VALUE} />
+      </div>
 
-      <Canvas
-        className="canvas canvas-background"
-        // eventSource={document.getElementById("root")}
-      >
-        {/* <CameraControls makeDefault /> */}
+      <Canvas className="canvas canvas-background">
         <Stars
           radius={120}
           depth={10}

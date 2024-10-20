@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { useAtom } from "jotai"
 import { styled } from "styled-components"
 import classNames from "classnames"
@@ -41,7 +41,7 @@ export const Article = styled.article`
   }
 `
 
-export const ArticleWrapper = (props) => {
+export const ArticleWrapper = React.memo((props) => {
   const [explosionView] = useAtom(explosionViewAtom)
   const [currentSection, setCurrentSection] = useState(0)
 
@@ -77,4 +77,4 @@ export const ArticleWrapper = (props) => {
       )}
     </Article>
   )
-}
+})

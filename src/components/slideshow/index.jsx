@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react"
+import React from "react"
 import { useAtom } from "jotai"
 import { styled } from "styled-components"
 import { COLOR_SECTION } from "@/store/base"
@@ -39,7 +39,7 @@ const Div = styled.div`
   }
 `
 
-export const Slideshow = ({ data, max }) => {
+export const Slideshow = React.memo(({ data, max }) => {
   const [explosionView] = useAtom(explosionViewAtom)
 
   return (
@@ -70,4 +70,4 @@ export const Slideshow = ({ data, max }) => {
       ))}
     </Div>
   )
-}
+})
