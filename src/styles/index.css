@@ -19,7 +19,7 @@ body,
   width: 100%;
   height: 100%;
   background: #2b3756;
-  background-image: url(./texture/noise-light.png);
+  background-image: url("/texture/noise-light.png");
   z-index: 1;
 }
 
