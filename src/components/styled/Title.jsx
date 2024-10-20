@@ -24,8 +24,8 @@ export const Headline = styled.h3`
 `
 
 export const SubHeadline = styled.h4`
-  font-size: 2.5;
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: 2.5rem;
+  font-size: clamp(2rem, 5vw, 2.7rem);
   font-weight: 300;
-  line-height: 1.2;
+  line-height: 1;
 `

@@ -15,6 +15,43 @@
   }
 }
 
+h1,
+h2,
+h3,
+h4 {
+  &:has(> em) {
+    position: relative;
+    z-index: 1;
+    &::before {
+      content: "»";
+      content: "„";
+    }
+    &::after {
+      content: "«";
+      content: "“";
+      position: absolute;
+      transform: translateX(8px);
+    }
+  }
+
+  em {
+    font-style: italic;
+    position: relative;
+    &::after {
+      position: absolute;
+      display: block;
+      content: "";
+      background-color: #81ad97;
+      width: 105%;
+      height: 2.3rem;
+      bottom: -0.2rem;
+      left: -2.5%;
+      left: -2.5%;
+      z-index: -1;
+    }
+  }
+}
+
 /* type */
 .simple {
   /* standard headline */
