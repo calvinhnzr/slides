@@ -12,10 +12,11 @@ export const Container = styled.div`
   position: relative;
 
   &.full {
-    border-radius: 1rem;
+    /* border-radius: 1rem; */
 
     grid-column: 1 / 13;
     grid-row: 1 / 13;
+    /* outline: 1px solid red; */
   }
 
   &.side {

@@ -3,7 +3,6 @@ import { useAtom } from "jotai"
 import { styled } from "styled-components"
 import { COLOR_SECTION, COLOR_CARD } from "@/store/base"
 import { explosionViewAtom } from "@/store/atoms"
-import "@/styles/Slide.css"
 
 import { MainWrapper } from "./Main"
 import { ArticleWrapper } from "./Article"

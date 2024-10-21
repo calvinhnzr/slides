@@ -1,8 +1,9 @@
-import React, { useState } from "react"
+import React, { useState, useRef } from "react"
 import { useAtom } from "jotai"
 import { styled } from "styled-components"
+import classNames from "classnames"
 import { explosionViewAtom } from "@/store/atoms"
-import "@/styles/Slide.css"
+
 import { GAP_EXPLOSION } from "@/store/base"
 import useKeydown from "@/hooks/useKeydown"
 import { Progress } from "@/components/styled/Progress"
@@ -36,6 +37,11 @@ export const MainWrapper = React.memo((props) => {
   const [currentArticle, setCurrentArticle] = useState(0)
   // const [currentArticle, setCurrentArticle] = useAtom(currentArticleAtom)
   const [explosionView] = useAtom(explosionViewAtom)
+  const mainRef = useRef()
+
+  const mainClassNames = classNames({
+    explosion: explosionView,
+  })
 
   useKeydown((event) => {
     switch (event.key) {
@@ -56,7 +62,8 @@ export const MainWrapper = React.memo((props) => {
       <Main
         currentArticle={currentArticle}
         gap={GAP_EXPLOSION}
-        className={explosionView ? "explosion" : ""}
+        className={mainClassNames}
+        ref={mainRef}
       >
         {React.Children.map(props.children, (child) =>
           React.cloneElement(child, { currentArticle })

@@ -4,7 +4,6 @@ import { styled } from "styled-components"
 import classNames from "classnames"
 import { COLOR_OUTRO, COLOR_INTRO, COLOR_SECTION } from "@/store/base"
 import { explosionViewAtom } from "@/store/atoms"
-import "@/styles/Slide.css"
 import { GAP_EXPLOSION } from "@/store/base"
 import useKeydown from "@/hooks/useKeydown"
 

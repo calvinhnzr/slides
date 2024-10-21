@@ -1,13 +1,12 @@
 export const headline = "Was ist das Ziel?"
-export const layout = "normal"
+export const layout = "grid"
 export const type = "intro"
 
-### <em>{headline}</em>
+### <Mark>{headline}</Mark>
 
 <Container className="side">
   {/* <Card> */}
   <View className="canvas-view">
-    <CameraControls makeDefault />
     <Stage adjustCamera={false}>
       <Target />
     </Stage>

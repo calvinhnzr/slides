@@ -20,7 +20,7 @@ import "@/styles/reset.css"
 import "@/styles/index.css"
 
 import Tree from "@/components/render/Tree"
-import Stone from "@/components/render/Stone"
+import Stones from "@/components/render/Stones"
 import Target from "@/components/render/Target"
 
 import { Card, Container } from "@/components/styled/Card"
@@ -30,6 +30,11 @@ import {
   Title,
   SubTitle,
 } from "@/components/styled/Title"
+
+import { ol, ul, li } from "@/components/styled/List"
+import { h1, h2, h3, h4, p, a, Mark, i, em } from "@/components/styled/Text"
+import { Content } from "@/components/styled/Content"
+
 import { Scene } from "@/components/render/Scene"
 
 const GlobalStyle = createGlobalStyle`
@@ -52,10 +57,17 @@ createRoot(document.getElementById("root")).render(
   // <StrictMode>
   <MDXProvider
     components={{
-      h1: Title,
-      h2: SubTitle,
-      h3: Headline,
-      h4: SubHeadline,
+      h1: h1,
+      h2: h2,
+      h3: h3,
+      h4: h4,
+      ol: ol,
+      ul: ul,
+      li: li,
+      a: a,
+      Mark,
+      em: em,
+      Content,
       Card,
       Container,
       View,
@@ -65,7 +77,7 @@ createRoot(document.getElementById("root")).render(
       CameraControls,
       OrbitControls,
       Torus,
-      Stone,
+      Stones,
       Tree,
       Stage,
       Target,

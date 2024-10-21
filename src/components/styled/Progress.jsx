@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { COLOR_SECTION, COLOR_EXPLOSION } from "@/store/base"
+import { COLOR_SECTION, COLOR_EXPLOSION, COLOR_CARD } from "@/store/base"
 
 export const Progress = styled.progress`
   z-index: 100;
@@ -18,13 +18,13 @@ export const Progress = styled.progress`
     border: none;
     color: ${COLOR_EXPLOSION};
 
-    background-color: ${COLOR_SECTION};
+    background-color: ${COLOR_CARD};
   }
   &[value]::-webkit-progress-value {
     background-color: ${COLOR_EXPLOSION};
     transition: width 0.3s ease-in-out;
   }
   &[value]::-webkit-progress-bar {
-    background-color: ${COLOR_SECTION};
+    background-color: ${COLOR_CARD};
   }
 `

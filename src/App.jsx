@@ -61,6 +61,8 @@ export function App() {
       <Canvas
         className="canvas canvas-view"
         eventSource={document.getElementById("root")}
+        flat
+        shadows
       >
         {explosionView ? <Perf position={"top-left"} /> : null}
         <View.Port />
