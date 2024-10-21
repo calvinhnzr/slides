@@ -14,26 +14,12 @@ export const ul = styled.ul`
 
     position: relative;
     z-index: 1;
-    padding: 1rem 0;
 
     &::before {
       content: "...";
+      content: "_";
       position: absolute;
       left: -1.5rem;
-    }
-
-    em {
-      padding: 1rem;
-      margin: 0 0.5rem;
-      background-color: #4c5869;
-
-      &.green {
-        background-color: #81ad97;
-      }
-      &.red {
-        background-color: #da736b;
-      }
-      font-weight: 400;
     }
   }
 `
@@ -49,5 +35,22 @@ export const li = styled.li`
   &:has(> a) {
     padding: 0.25rem 0;
     padding-left: 0.75rem;
+  }
+  &:has(> em) {
+    padding: 1rem 0;
+  }
+
+  em {
+    padding: 1rem;
+    margin: 0 0.5rem;
+    background-color: #4c5869;
+
+    &.green {
+      background-color: #81ad97;
+    }
+    &.red {
+      background-color: #da736b;
+    }
+    font-weight: 400;
   }
 `
