@@ -53,7 +53,17 @@ export const a = styled.a`
 `
 
 // Highlight
-export const em = styled.em``
+export const Em = styled.em`
+  &::before {
+    content: "»";
+    content: "„";
+  }
+
+  &::after {
+    content: "«";
+    content: "“";
+  }
+`
 
 // Italic
 export const i = styled.i`

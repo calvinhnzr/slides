@@ -32,7 +32,7 @@ import {
 } from "@/components/styled/Title"
 
 import { ol, ul, li } from "@/components/styled/List"
-import { h1, h2, h3, h4, p, a, Mark, i, em } from "@/components/styled/Text"
+import { h1, h2, h3, h4, p, a, Mark, i, Em } from "@/components/styled/Text"
 import { Content } from "@/components/styled/Content"
 
 import { Scene } from "@/components/render/Scene"
@@ -66,7 +66,7 @@ createRoot(document.getElementById("root")).render(
       li: li,
       a: a,
       Mark,
-      em: em,
+      Em,
       Content,
       Card,
       Container,
